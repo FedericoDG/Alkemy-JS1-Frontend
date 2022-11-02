@@ -1,8 +1,10 @@
+import {Button} from '@mui/material'
 import {Formik, Form} from 'formik'
 
 import Input from '../Shared/Input'
 
 import validationSchema from './validationSchema'
+import styles from './login.module.css'
 
 const Login = () => (
   <Formik
@@ -11,12 +13,16 @@ const Login = () => (
     onSubmit={(values) => console.log(values)}
   >
     {() => (
-      <Form>
-        <Input label="Email" name="email" placeholder="Your email" />
-        <Input label="Password" name="password" placeholder="Password" type="password" />
+      <div className={styles.boxForm}>
+        <Form className={styles.form}>
+          <Input label="Email" name="email" placeholder="Your email" />
+          <Input label="Password" name="password" placeholder="Password" type="password" />
 
-        <button type="submit">Sign In</button>
-      </Form>
+          <Button className={styles.button} type="submit" variant="contained">
+            Sign In
+          </Button>
+        </Form>
+      </div>
     )}
   </Formik>
 )
