@@ -1,12 +1,5 @@
-import Footer from '../components/Footer/Footer'
-import Header from '../components/Header/Header'
+import AppRouter from './router/AppRouter'
 
-const App = () => (
-  <>
-    <Header />
-    <div>Holaaa</div>
-    <Footer />
-  </>
-)
+const App = () => <AppRouter />
 
 export default App
