@@ -2,8 +2,10 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
 import Admin from '../Pages/Admin'
 import Dashboard from '../Pages/Dashboard'
+import Footer from '../components/ui/Footer'
 import Login from '../Pages/Login'
 import Register from '../Pages/Register'
+import ResponsiveAppBar from '../components/ui/Header'
 
 import AdminRoutes from './AdminRoutes'
 import PrivateRoutes from './PrivateRoutes'
@@ -29,6 +31,7 @@ const AppRoutes = () => (
       <Route
         element={
           <AdminRoutes>
+            <ResponsiveAppBar />
             <Routes>
               <Route element={<Admin />} path="/" />
             </Routes>
@@ -40,6 +43,7 @@ const AppRoutes = () => (
       <Route
         element={
           <PrivateRoutes>
+            <ResponsiveAppBar />
             <Routes>
               <Route element={<Dashboard />} path="/" />
               {/* <Route element={<Error404 />} path="/*" /> */}
@@ -49,6 +53,7 @@ const AppRoutes = () => (
         path="/dashboard/*"
       />
     </Routes>
+    <Footer />
   </BrowserRouter>
 )
 
