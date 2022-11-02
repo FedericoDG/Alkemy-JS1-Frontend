@@ -1,0 +1,41 @@
+.container{
+  position: relative;
+  width: 100%;
+}
+
+.container .input {
+  padding-bottom: 1.3rem;
+}
+
+.container .error {
+  position: absolute;
+  bottom: .5rem;
+  left: 0;
+  width: 100%;
+  padding: 0 0.5rem;
+  background-color: red;
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 0 0 0.3rem 0.3rem;
+}
+
+.boxForm {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxForm .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.form .button {
+  width: 50%;
+}

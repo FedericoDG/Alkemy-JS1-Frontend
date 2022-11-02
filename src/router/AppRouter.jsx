@@ -1,10 +1,10 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
-import Admin from '../Pages/Admin'
-import Dashboard from '../Pages/Dashboard'
+import Admin from '../pages/Admin'
+import Dashboard from '../pages/Dashboard'
 import Footer from '../components/ui/Footer'
-import Login from '../Pages/Login'
-import Register from '../Pages/Register'
+import LoginPage from '../pages/LoginPage'
+import RegisterPage from '../pages/RegisterPage'
 import ResponsiveAppBar from '../components/ui/Header'
 
 import AdminRoutes from './AdminRoutes'
@@ -19,8 +19,8 @@ const AppRoutes = () => (
         element={
           <PublicRoutes>
             <Routes>
-              <Route element={<Login />} path="/" />
-              <Route element={<Register />} path="/register" />
+              <Route element={<LoginPage />} path="/" />
+              <Route element={<RegisterPage />} path="/register" />
               <Route element={<Navigate replace to="/" />} path="/*" />
             </Routes>
           </PublicRoutes>
