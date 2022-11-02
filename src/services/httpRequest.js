@@ -64,5 +64,9 @@ export const putRequest = (endpoint, data, headers) => httpRequest('put', endpoi
  * @param {string} endpoint
  * @param {object} headers
  * @returns {Promise}
+ *
+ * this function is used to handle delete requests, receives the endpoint, data and headers,
+ * if not headers are passed, then the headers object is setted to {}
+ * if token exist in localStorage, then add it to headers
  */
 export const deleteRequest = (endpoint, headers) => httpRequest('delete', endpoint, null, headers)
