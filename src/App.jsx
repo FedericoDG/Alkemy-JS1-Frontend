@@ -1,9 +1,5 @@
-import RegisterPage from './pages/RegisterPage'
+import AppRouter from './router/AppRouter'
 
-const App = () => (
-  <div>
-    <RegisterPage />
-  </div>
-)
+const App = () => <AppRouter />
 
 export default App
