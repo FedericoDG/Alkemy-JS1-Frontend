@@ -1,3 +1,5 @@
-const App = () => <div>App</div>
+import AppRouter from './router/AppRouter'
+
+const App = () => <AppRouter />
 
 export default App
