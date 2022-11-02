@@ -2,9 +2,9 @@ import {Button} from '@mui/material'
 import {Formik, Form} from 'formik'
 
 import Input from '../Shared/Input'
+import styles from '../Shared/reusable.module.css'
 
 import validationSchema from './validationSchema'
-import styles from './login.module.css'
 
 const Login = () => (
   <Formik
