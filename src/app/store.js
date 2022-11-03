@@ -1,9 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
 
-// import counterReducer from '../features/counter/counterSlice'
+// eslint-disable-next-line import/no-named-as-default
+import authSlice from './authSlice'
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    // counter: counterReducer,
+    auth: authSlice,
   },
 })
+
+export default store

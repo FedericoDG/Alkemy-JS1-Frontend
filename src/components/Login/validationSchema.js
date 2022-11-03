@@ -1,8 +1,8 @@
 import * as Yup from 'yup'
 
-const validationSchema = Yup.object({
+const validationSchemaLogin = Yup.object({
   email: Yup.string().email('Format not valid').required('Required'),
-  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required'),
+  password: Yup.string().required('Required'),
 })
 
-export default validationSchema
+export default validationSchemaLogin
