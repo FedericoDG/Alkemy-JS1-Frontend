@@ -1,4 +1,5 @@
 import localStorage from '../utils/localStorage'
+import notification from '../utils/notification'
 
 import {postRequest} from './httpRequest'
 
@@ -8,8 +9,12 @@ const login = async (email, password) => {
 
     localStorage.write('alkybank', body)
 
+    notification('success', `Hola ${body.user.firstName} 😀`)
+
     return body
   } catch (error) {
+    notification('error', `${error.response.data.message}`)
+
     throw new Error(error)
   }
 }
