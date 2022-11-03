@@ -1,10 +1,11 @@
 import {Navigate} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const PublicRoutes = ({children}) => {
-  // TODO: Get token and user rol from Redux Strore.
-  const auth = ''
+  const {auth} = useSelector((state) => state)
+  const {logged} = auth
 
-  return auth ? <Navigate to="/dashboard" /> : children
+  return logged ? <Navigate to="/dashboard" /> : children
 }
 
 export default PublicRoutes

@@ -1,24 +1,28 @@
-import * as React from 'react'
+import {useDispatch} from 'react-redux'
+import {useState} from 'react'
 import AppBar from '@mui/material/AppBar'
+import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-import {useState} from 'react'
+import Toolbar from '@mui/material/Toolbar'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
+
+import {authLogout} from '../../app/authSlice'
 
 const pages = ['Carga de saldo', 'Gastos', 'Balance', 'Movimientos', 'Envío de dinero']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const settings = ['Perfil']
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
+
+  const dispatch = useDispatch()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -29,6 +33,11 @@ const ResponsiveAppBar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
+  }
+
+  const handleLogout = () => {
+    dispatch(authLogout())
+    // window.location = '/'
   }
 
   const handleCloseUserMenu = () => {
@@ -128,7 +137,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{flexGrow: 0}}>
             <Tooltip title="Open settings">
               <IconButton sx={{p: 0}} onClick={handleOpenUserMenu}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="avatar" src="avatar.svg" sx={{width: 56, height: 56}} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -152,6 +161,9 @@ const ResponsiveAppBar = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={handleLogout}>
+                <Typography textAlign="center">Salir</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

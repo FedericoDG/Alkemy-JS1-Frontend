@@ -1,10 +1,11 @@
 import {Navigate} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const AdminRoutes = ({children}) => {
-  // TODO: Get token and user rol from Redux Strore.
-  const auth = ''
+  const {auth} = useSelector((state) => state)
+  const role = auth.user?.role
 
-  return auth === 'ADMIN' ? children : <Navigate to="/dashboard" />
+  return role === 1 ? children : <Navigate to="/dashboard" />
 }
 
 export default AdminRoutes

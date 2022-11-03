@@ -1,11 +1,12 @@
 import {Navigate} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const PrivateRoutes = ({children}) => {
-  // TODO: Get token and user rol from Redux Strore.
-  const auth = ''
+  const {auth} = useSelector((state) => state)
+  const role = auth.user?.role
 
   // eslint-disable-next-line no-nested-ternary
-  return auth ? auth === 'ADMIN' ? <Navigate to="/admin" /> : children : <Navigate to="/" />
+  return role ? role === 1 ? <Navigate to="/admin" /> : children : <Navigate to="/" />
 }
 
 export default PrivateRoutes
