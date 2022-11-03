@@ -8,7 +8,7 @@ import validationSchema from './validationSchema'
 
 const Register = () => (
   <Formik
-    initialValues={{name: '', email: '', password1: '', password2: ''}}
+    initialValues={{name: '', email: '', password: '', repeatPassword: ''}}
     validationSchema={validationSchema}
     onSubmit={(values) => console.log(values)}
   >
