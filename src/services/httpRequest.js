@@ -5,7 +5,7 @@ const httpRequest = (verb, endpoint, data, headers = {}) => {
     headers,
   }
 
-  const token = localStorage.getItem('token')
+  const {token} = JSON.parse(localStorage.getItem('alkybank'))
 
   if (token) config.headers.Authorization = `Bearer ${token}`
 
