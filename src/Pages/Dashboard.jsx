@@ -1,17 +1,16 @@
-import {Card, CardContent, Container, Typography, Grid} from '@mui/material'
-import {blue, cyan, green, pink} from '@mui/material/colors'
+import {Container, Typography, Grid} from '@mui/material'
 
 import useGetBalance from '../hooks/useBalance'
-
-const colorLightBlue = blue[500]
-const colorCyan = cyan.A400
-const colorPink = pink[300]
-const colorGreen = green[300]
+import ExpensesChart from '../components/charts/ExpensesChart'
+import CustomCard from '../components/ui/Card'
+import ExpensesTable from '../components/ui/ExpensesTable'
 
 const Dashboard = () => {
   const {data, isLoading, isError, error} = useGetBalance()
 
   if (isLoading) return <h1>ESTO DEBERÍA SER UN SPINNER</h1>
+
+  const {incomes, expenses, balance, transactions} = data
 
   return (
     <Container maxWidth="xl" sx={{marginY: 2}}>
@@ -24,55 +23,27 @@ const Dashboard = () => {
         spacing={1}
         wrap="wrap"
       >
-        <Grid item md={3} xs={6}>
-          <Card sx={{minWidth: 200}}>
-            <CardContent>
-              <Typography color={colorLightBlue} component="div" textAlign="center" variant="h6">
-                $ {data.incomes.total}
-              </Typography>
-              <Typography color="GrayText" component="div" textAlign="center" variant="body2">
-                Ingresos
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={6}>
-          <Card sx={{minWidth: 200}}>
-            <CardContent>
-              <Typography color={colorPink} component="div" textAlign="center" variant="h6">
-                $ {data.expenses.total}
-              </Typography>
-              <Typography color="GrayText" component="div" textAlign="center" variant="body2">
-                Gastos
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={6}>
-          <Card sx={{minWidth: 200}}>
-            <CardContent>
-              <Typography color={colorGreen} component="div" textAlign="center" variant="h6">
-                $ {data.balance}
-              </Typography>
-              <Typography color="GrayText" component="div" textAlign="center" variant="body2">
-                Balance
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={6}>
-          <Card sx={{minWidth: 200}}>
-            <CardContent>
-              <Typography color={colorCyan} component="div" textAlign="center" variant="h6">
-                {data.transactions.amount}
-              </Typography>
-              <Typography color="GrayText" component="div" textAlign="center" variant="body2">
-                Transaciones
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        <CustomCard amount={incomes.total} text="Ingresos" />
+        <CustomCard amount={expenses.total} text="Gastos" />
+        <CustomCard amount={balance} text="Balance" />
+        <CustomCard amount={transactions.amount} text="Transacciones" />
       </Grid>
+      {expenses.amount > 0 && (
+        <div style={{marginTop: 16}}>
+          <Typography color="GrayColor" variant="button">
+            TOTAL DE GASTOS
+          </Typography>
+          <Grid container alignItems="center" mt={1} spacing={4}>
+            <Grid item lg={4} md={5} sm={12}>
+              <ExpensesChart obj={expenses.distribution} />
+            </Grid>
+            <div style={{flex: 1}} />
+            <Grid item lg={6} md={7} sm={12}>
+              <ExpensesTable distribution={expenses.distribution} />
+            </Grid>
+          </Grid>
+        </div>
+      )}
     </Container>
   )
 }
