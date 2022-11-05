@@ -33,12 +33,12 @@ const Dashboard = () => {
           <Typography color="GrayColor" variant="button">
             TOTAL DE GASTOS
           </Typography>
-          <Grid container alignItems="center" mt={1} spacing={4}>
-            <Grid item lg={4} md={5} sm={12}>
+          <Grid container alignItems="center" mx={1}>
+            <Grid item lg={4} md={5} xs={12}>
               <ExpensesChart obj={expenses.distribution} />
             </Grid>
             <div style={{flex: 1}} />
-            <Grid item lg={6} md={7} sm={12}>
+            <Grid item lg={6} md={7} xs={12}>
               <ExpensesTable distribution={expenses.distribution} />
             </Grid>
           </Grid>
