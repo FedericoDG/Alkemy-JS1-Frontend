@@ -4,6 +4,7 @@ import useGetBalance from '../hooks/useBalance'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import CustomCard from '../components/ui/Card'
 import ExpensesTable from '../components/ui/ExpensesTable'
+import TransactionsTable from '../components/ui/TransactionsTable'
 
 const Dashboard = () => {
   const {data, isLoading, isError, error} = useGetBalance()
@@ -42,6 +43,9 @@ const Dashboard = () => {
               <ExpensesTable distribution={expenses.distribution} />
             </Grid>
           </Grid>
+          <div className="balance-table-container" style={{marginTop: '15px'}}>
+            <TransactionsTable />
+          </div>
         </div>
       )}
     </Container>
