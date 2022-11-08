@@ -8,6 +8,7 @@ import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import CustomCard from '../components/ui/Card'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
+import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
 import {useGetMe} from '../hooks/useUsers'
 import {authLogout} from '../app/authSlice'
@@ -81,6 +82,9 @@ const Dashboard = () => {
               <ExpensesTable distribution={expenses.distribution} />
             </Grid>
           </Grid>
+          <div className="balance-table-container" style={{marginTop: '15px'}}>
+            <TransactionsTable transactions={transactions.details} />
+          </div>
         </div>
       )}
     </Container>
