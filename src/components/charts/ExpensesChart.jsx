@@ -5,7 +5,7 @@ import generateColor from '../../utils/generateColor'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-const ExpensesChart = ({obj}) => {
+const ExpensesChart = ({obj, displayLabel = true}) => {
   const coso = {
     labels: obj.map((el) => el.name),
     datasets: [
@@ -25,7 +25,7 @@ const ExpensesChart = ({obj}) => {
       options={{
         plugins: {
           legend: {
-            display: true,
+            display: displayLabel,
             position: 'bottom',
           },
         },

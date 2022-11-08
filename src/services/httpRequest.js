@@ -58,7 +58,22 @@ export const postRequest = (endpoint, data, headers) => httpRequest('post', endp
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
+
 export const putRequest = (endpoint, data, headers) => httpRequest('put', endpoint, data, headers)
+
+// handle patch requests
+/**
+ * @param {string} endpoint
+ * @param {object} data
+ * @param {object} headers
+ * @returns {Promise}
+ *
+ * this function is used to handle put requests, receives the endpoint, data and headers,
+ * if not headers are passed, then the headers object is setted to {}
+ * if token exist in localStorage, then add it to headers
+ */
+export const patchRequest = (endpoint, data, headers) =>
+  httpRequest('patch', endpoint, data, headers)
 
 /**
  * @param {string} endpoint
@@ -69,4 +84,5 @@ export const putRequest = (endpoint, data, headers) => httpRequest('put', endpoi
  * if not headers are passed, then the headers object is setted to {}
  * if token exist in localStorage, then add it to headers
  */
+
 export const deleteRequest = (endpoint, headers) => httpRequest('delete', endpoint, null, headers)

@@ -1,6 +1,6 @@
 import {toast} from 'react-toastify'
 
-const notification = (status, message) => {
+const notification = (status, message, theme = 'colored') => {
   toast[status](message, {
     position: 'top-right',
     hideProgressBar: false,
@@ -8,7 +8,7 @@ const notification = (status, message) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: 'colored',
+    theme,
   })
 }
 
