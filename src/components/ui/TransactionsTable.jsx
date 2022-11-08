@@ -1,22 +1,30 @@
 import {DataGrid} from '@mui/x-data-grid'
 
 const columns = [
-  {field: 'id', headerName: 'ID', width: 70},
-  {field: 'firstName', headerName: 'First name', width: 130},
-  {field: 'lastName', headerName: 'Last name', width: 130},
+  {field: 'amount', headerName: 'Amount', type: 'number', width: 60, flex: 0.5},
+  {field: 'concept', headerName: 'Concept', width: 130, flex: 1},
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
+    field: 'date',
+    headerName: 'Date',
+    type: 'date',
+    width: 130,
+    flex: 1,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
+    field: 'categoryName',
+    headerName: 'Category',
+    description: 'una descripcion',
     width: 160,
-    valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    flex: 1,
+  },
+  {
+    field: 'categoryType',
+    headerName: 'Flow',
+    with: 130,
+    flex: 1,
+    renderCell: (cellValues) => (
+      <div>{`${cellValues.value === 'in' ? '🟢' : '🔴'} ${cellValues.value}`}</div>
+    ),
   },
 ]
 
@@ -32,16 +40,31 @@ const rows = [
   {id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65},
 ]
 
-const TransactionsTable = () => (
-  <div style={{height: 400, width: '100%'}}>
-    <DataGrid
-      checkboxSelection
-      columns={columns}
-      pageSize={5}
-      rows={rows}
-      rowsPerPageOptions={[5]}
-    />
-  </div>
-)
+const TransactionsTable = ({transactions}) => {
+  const tableRows = transactions.map(
+    ({amount, concept, transactionDate, category, flow}, index) => ({
+      id: index,
+      amount,
+      concept,
+      date: Date(transactionDate),
+      categoryName: category.name,
+      categoryType: flow,
+    })
+  )
+
+  console.log(tableRows[0].categoryType)
+
+  return (
+    <div style={{height: 400, width: '100%'}}>
+      <DataGrid
+        // checkboxSelection
+        columns={columns}
+        pageSize={5}
+        rows={tableRows}
+        rowsPerPageOptions={[5]}
+      />
+    </div>
+  )
+}
 
 export default TransactionsTable

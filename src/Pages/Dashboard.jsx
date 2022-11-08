@@ -44,7 +44,7 @@ const Dashboard = () => {
             </Grid>
           </Grid>
           <div className="balance-table-container" style={{marginTop: '15px'}}>
-            <TransactionsTable />
+            <TransactionsTable transactions={transactions.details} />
           </div>
         </div>
       )}
