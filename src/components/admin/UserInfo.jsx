@@ -12,10 +12,10 @@ import {
   Paper,
 } from '@mui/material'
 import {useDispatch} from 'react-redux'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import LockResetIcon from '@mui/icons-material/LockReset'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import CancelIcon from '@mui/icons-material/Cancel'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
+import LockPersonIcon from '@mui/icons-material/LockPerson'
+import LockResetIcon from '@mui/icons-material/LockReset'
 
 import {useBlockUser, useDeleteUser, useUnblockUser} from '../../hooks/useUsers'
 import {setActiveUser, toggleResetPasswordModal, togleAdminDrawer} from '../../app/uiSlice'
@@ -90,7 +90,7 @@ const UserInfo = ({user}) => {
             color="warning"
             disabled={user.status === 'blocked'}
             size="small"
-            startIcon={<CancelIcon />}
+            startIcon={<LockPersonIcon />}
             variant="contained"
             onClick={() => handleBlock(user.id)}
           >
@@ -103,7 +103,7 @@ const UserInfo = ({user}) => {
             color="success"
             disabled={user.status === 'active'}
             size="small"
-            startIcon={<CheckCircleIcon />}
+            startIcon={<LockOpenIcon />}
             variant="contained"
             onClick={() => hanbleUnblock(user.id)}
           >

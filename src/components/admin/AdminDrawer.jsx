@@ -1,4 +1,4 @@
-import {Container, Grid, Drawer, Button} from '@mui/material'
+import {Container, Grid, Drawer, Button, Stack, Typography} from '@mui/material'
 import {useDispatch, useSelector} from 'react-redux'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -15,7 +15,7 @@ const AdminDrawer = () => {
 
   const dispatch = useDispatch()
 
-  const {data: userDetails, isLoading} = useGetUserDetails(activeUserId)
+  const {data: userDetails} = useGetUserDetails(activeUserId)
 
   const handleClose = () => {
     dispatch(togleAdminDrawer())
@@ -28,12 +28,17 @@ const AdminDrawer = () => {
 
   return (
     <Drawer anchor="bottom" open={adminDrawer} onClose={handleClose}>
-      <Container maxWidth="xl" sx={{marginY: 2}}>
-        <div style={{marginLeft: 'auto'}}>
-          <Button color="primary" startIcon={<CloseIcon />} variant="text" onClick={handleClose}>
-            Cerrar
-          </Button>
-        </div>
+      <Container maxWidth="xl" sx={{height: '100vh'}}>
+        <Button
+          color="primary"
+          startIcon={<CloseIcon />}
+          sx={{m: 2}}
+          variant="text"
+          onClick={handleClose}
+        >
+          Cerrar
+        </Button>
+
         <Grid container justifyContent="space-between">
           <Grid item xs={6}>
             <UserInfo user={user} />
@@ -54,8 +59,13 @@ const AdminDrawer = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TransactionsTable transactions={transactions.details} />
+          <Grid item py={1} xs={12}>
+            <Stack>
+              <Typography color="initial" variant="h6">
+                Transacciones
+              </Typography>
+              <TransactionsTable height={380} rows={20} transactions={transactions.details} />
+            </Stack>
           </Grid>
         </Grid>
       </Container>

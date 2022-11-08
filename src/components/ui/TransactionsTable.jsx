@@ -16,12 +16,13 @@ const StyledDataGrid = styled(DataGrid)`
   }
 `
 
-const TransactionsTable = ({transactions}) => {
+const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
   const columns = [
     {
       field: 'amount',
       headerName: 'Monto',
       width: 120,
+      minWidth: 120,
       align: 'right',
       flex: 1,
       renderCell: ({row}) =>
@@ -39,6 +40,7 @@ const TransactionsTable = ({transactions}) => {
       field: 'flow',
       headerName: 'Tipo',
       width: 80,
+      minWidth: 80,
       align: 'center',
       renderCell: ({row}) =>
         row.flow === 'in' ? (
@@ -51,6 +53,7 @@ const TransactionsTable = ({transactions}) => {
       field: 'date',
       headerName: 'Fecha',
       width: 160,
+      minWidth: 160,
       align: 'left',
       flex: 2,
       renderCell: ({row}) => (
@@ -60,7 +63,7 @@ const TransactionsTable = ({transactions}) => {
     {
       field: 'category',
       headerName: 'Categoría',
-      width: 160,
+      minWidth: 160,
       align: 'left',
       flex: 2,
       renderCell: ({row}) => (
@@ -82,7 +85,7 @@ const TransactionsTable = ({transactions}) => {
     {
       field: 'concept',
       headerName: 'Descripción',
-      width: 250,
+      minWidth: 250,
       align: 'left',
       flex: 4,
       renderCell: ({row}) =>
@@ -95,15 +98,15 @@ const TransactionsTable = ({transactions}) => {
   ]
 
   return (
-    <Paper style={{height: 473, width: '100%'}}>
+    <Paper sx={{height, width: '100%'}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}
-        getRowHeight={() => 60}
+        getRowHeight={() => 58}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        pageSize={6}
+        pageSize={rows}
         rows={transactions}
-        rowsPerPageOptions={[6]}
+        rowsPerPageOptions={[rows]}
         sx={{fontFamily: 'Roboto Mono, monospace'}}
       />
     </Paper>

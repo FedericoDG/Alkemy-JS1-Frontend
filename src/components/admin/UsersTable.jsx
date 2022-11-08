@@ -1,8 +1,8 @@
 import {DataGrid, esES} from '@mui/x-data-grid'
 import {IconButton, Paper, Tooltip} from '@mui/material'
 import {useDispatch} from 'react-redux'
-import CancelIcon from '@mui/icons-material/Cancel'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
+import LockPersonIcon from '@mui/icons-material/LockPerson'
 import LockResetIcon from '@mui/icons-material/LockReset'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import styled from '@emotion/styled'
@@ -83,7 +83,7 @@ const UsersTable = ({users}) => {
                 disabled={obj.row.status === 'blocked'}
                 onClick={() => handleBlock(obj.row.id)}
               >
-                <CancelIcon />
+                <LockPersonIcon />
               </IconButton>
             </span>
           </Tooltip>
@@ -94,7 +94,7 @@ const UsersTable = ({users}) => {
                 disabled={obj.row.status !== 'blocked'}
                 onClick={() => hanbleUnblock(obj.row.id)}
               >
-                <CheckCircleIcon />
+                <LockOpenIcon />
               </IconButton>
             </span>
           </Tooltip>
@@ -126,15 +126,15 @@ const UsersTable = ({users}) => {
   ]
 
   return (
-    <Paper style={{height: 490, width: '100%'}}>
+    <Paper style={{height: 448, width: '100%'}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}
         getRowHeight={() => 41}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        pageSize={10}
+        pageSize={8}
         rows={users}
-        rowsPerPageOptions={[10]}
+        rowsPerPageOptions={[8]}
       />
     </Paper>
   )

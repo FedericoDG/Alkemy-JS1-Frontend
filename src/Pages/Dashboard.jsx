@@ -23,7 +23,7 @@ const Dashboard = () => {
   const {incomes, expenses, balance, transactions} = data
 
   return (
-    <Container maxWidth="xl" sx={{paddingY: 2, height: 'calc(100vh - 208px)'}}>
+    <Container maxWidth="xl" sx={{paddingY: 2}}>
       <Grid
         container
         alignContent="center"
@@ -64,22 +64,24 @@ const Dashboard = () => {
         </Button>
       </Grid>
       {expenses.amount > 0 && (
-        <Grid container alignItems="flex-start" mt={2}>
-          <Grid item lg={4} sm={6} xs={12}>
-            <Stack>
-              <Typography color="GrayColor" variant="h4">
-                Gastos
-              </Typography>
-              <ExpensesChart obj={expenses.distribution} />
-            </Stack>
+        <>
+          <Typography color="GrayColor" variant="h4">
+            Gastos
+          </Typography>
+          <Grid container alignItems="flex-start" mt={2}>
+            <Grid item lg={4} sm={6} xs={12}>
+              <Stack>
+                <ExpensesChart obj={expenses.distribution} />
+              </Stack>
+            </Grid>
+            <div style={{flex: 1}} />
+            <Grid item lg={6} sm={6} xs={12}>
+              <ExpensesTable distribution={expenses.distribution} />
+            </Grid>
           </Grid>
-          <div style={{flex: 1}} />
-          <Grid item lg={6} paddingY={3} sm={6} xs={12}>
-            <ExpensesTable distribution={expenses.distribution} />
-          </Grid>
-        </Grid>
+        </>
       )}
-      <Stack mt={10}>
+      <Stack mt={4}>
         <Typography color="GrayColor" variant="h4">
           Transacciones
         </Typography>
