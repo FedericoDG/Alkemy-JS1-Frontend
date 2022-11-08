@@ -1,18 +1,12 @@
 import {
-  Container,
-  Box,
   TableContainer,
-  Grid,
-  Drawer,
   Table,
   TableRow,
   TableCell,
-  Stack,
-  Button,
-  Typography,
   TableHead,
   TableBody,
   Paper,
+  Chip,
 } from '@mui/material'
 
 const UserMoreInfo = ({user}) => (
@@ -31,13 +25,9 @@ const UserMoreInfo = ({user}) => (
           <TableCell align="left">{user.address}</TableCell>
           <TableCell align="center">
             {user.status === 'blocked' ? (
-              <Typography color="red" variant="button">
-                bloqueado
-              </Typography>
+              <Chip color="error" label="BLOQUEADO" />
             ) : (
-              <Typography color="green" variant="button">
-                activo
-              </Typography>
+              <Chip color="success" label="ACTIVO" />
             )}
           </TableCell>
         </TableRow>

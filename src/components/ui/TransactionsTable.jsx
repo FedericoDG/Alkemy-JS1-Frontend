@@ -16,7 +16,7 @@ const StyledDataGrid = styled(DataGrid)`
   }
 `
 
-const TransactionsTable = ({transactions}) => {
+const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
   const columns = [
     {
       field: 'amount',
@@ -95,15 +95,15 @@ const TransactionsTable = ({transactions}) => {
   ]
 
   return (
-    <Paper style={{height: 473, width: '100%'}}>
+    <Paper sx={{height, width: '100%'}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}
-        getRowHeight={() => 60}
+        getRowHeight={() => 58}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        pageSize={6}
+        pageSize={rows}
         rows={transactions}
-        rowsPerPageOptions={[6]}
+        rowsPerPageOptions={[rows]}
         sx={{fontFamily: 'Roboto Mono, monospace'}}
       />
     </Paper>
