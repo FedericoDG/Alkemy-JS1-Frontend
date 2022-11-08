@@ -1,9 +1,9 @@
 import {Box, Typography, Divider, Container} from '@mui/material'
-import IconButton from '@mui/joy/IconButton'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
+import IconButton from '@mui/joy/IconButton'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import TwitterIcon from '@mui/icons-material/Twitter'
 
 const socials = [
   {
@@ -60,10 +60,7 @@ const Footer = () => (
           </IconButton>
         ))}
       </Divider>
-      <Typography fontSize="24px" fontWeight="lg" letterSpacing="8px" textcolor="neutral.500">
-        AlkyBank
-      </Typography>
-      <Typography>©2022 JS Group 1</Typography>
+      <Typography>©2022 Grupo Fullstack JS 01</Typography>
     </Container>
   </Box>
 )

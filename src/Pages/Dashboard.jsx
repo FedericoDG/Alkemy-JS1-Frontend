@@ -1,33 +1,29 @@
 import {Container, Stack, Typography, Grid, Button} from '@mui/material'
-import {Navigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
 import AddCardIcon from '@mui/icons-material/AddCard'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 
+import {useGetMe} from '../hooks/useUsers'
 import CustomCard from '../components/ui/Card'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
+import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
 import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
-import {useGetMe} from '../hooks/useUsers'
-import {authLogout} from '../app/authSlice'
 
 const Dashboard = () => {
-  const {data, isLoading} = useGetBalance()
-
   const {data: me, isLoading: isLoadingMe} = useGetMe()
 
-  const dispatch = useDispatch()
+  const {data, isLoading} = useGetBalance()
 
-  if (isLoading || isLoadingMe) return <h1>ESTO DEBERÍA SER UN SPINNER</h1>
+  if (isLoading || isLoadingMe) return <LoadingSpinner />
 
   if (me.status === 'blocked') return <h1>CUENTA BLOQUEADA</h1>
 
   const {incomes, expenses, balance, transactions} = data
 
   return (
-    <Container maxWidth="xl" sx={{marginY: 2}}>
+    <Container maxWidth="xl" sx={{paddingY: 2, height: 'calc(100vh - 208px)'}}>
       <Grid
         container
         alignContent="center"
@@ -48,6 +44,7 @@ const Dashboard = () => {
         direction="row"
         gap={1}
         justifyContent="flex-end"
+        mt={2}
         my={1}
         wrap="wrap"
       >
@@ -67,26 +64,27 @@ const Dashboard = () => {
         </Button>
       </Grid>
       {expenses.amount > 0 && (
-        <div style={{marginTop: 16}}>
-          <Grid container alignItems="flex-start">
-            <Grid item lg={4} sm={6} xs={12}>
-              <Stack>
-                <Typography color="GrayColor" variant="button">
-                  TOTAL DE GASTOS
-                </Typography>
-                <ExpensesChart obj={expenses.distribution} />
-              </Stack>
-            </Grid>
-            <div style={{flex: 1}} />
-            <Grid item lg={6} paddingY={3} sm={6} xs={12}>
-              <ExpensesTable distribution={expenses.distribution} />
-            </Grid>
+        <Grid container alignItems="flex-start" mt={2}>
+          <Grid item lg={4} sm={6} xs={12}>
+            <Stack>
+              <Typography color="GrayColor" variant="h4">
+                Gastos
+              </Typography>
+              <ExpensesChart obj={expenses.distribution} />
+            </Stack>
           </Grid>
-          <div className="balance-table-container" style={{marginTop: '15px'}}>
-            <TransactionsTable transactions={transactions.details} />
-          </div>
-        </div>
+          <div style={{flex: 1}} />
+          <Grid item lg={6} paddingY={3} sm={6} xs={12}>
+            <ExpensesTable distribution={expenses.distribution} />
+          </Grid>
+        </Grid>
       )}
+      <Stack mt={10}>
+        <Typography color="GrayColor" variant="h4">
+          Transacciones
+        </Typography>
+        <TransactionsTable transactions={transactions.details} />
+      </Stack>
     </Container>
   )
 }
