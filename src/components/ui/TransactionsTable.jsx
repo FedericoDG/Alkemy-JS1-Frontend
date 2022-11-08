@@ -1,19 +1,21 @@
 import {DataGrid} from '@mui/x-data-grid'
 
 const columns = [
-  {field: 'amount', headerName: 'Amount', type: 'number', width: 60, flex: 0.5},
-  {field: 'concept', headerName: 'Concept', width: 130, flex: 1},
   {
-    field: 'date',
-    headerName: 'Date',
-    type: 'date',
-    width: 130,
-    flex: 1,
+    field: 'amount',
+    headerName: 'Amount',
+    type: 'number',
+    width: 60,
+    flex: 0.5,
+    description: 'Amount',
+    renderCell: (cellValues) => `$ ${cellValues.value}`,
   },
+  {field: 'concept', headerName: 'Concept', width: 130, flex: 1, description: 'Concept'},
+  {field: 'date', headerName: 'Date', type: 'date', width: 130, flex: 1, description: 'Date'},
   {
     field: 'categoryName',
     headerName: 'Category',
-    description: 'una descripcion',
+    description: 'Category',
     width: 160,
     flex: 1,
   },
@@ -22,22 +24,11 @@ const columns = [
     headerName: 'Flow',
     with: 130,
     flex: 1,
+    description: 'Flow',
     renderCell: (cellValues) => (
       <div>{`${cellValues.value === 'in' ? '🟢' : '🔴'} ${cellValues.value}`}</div>
     ),
   },
-]
-
-const rows = [
-  {id: 1, lastName: 'Snow', firstName: 'Jon', age: 35},
-  {id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42},
-  {id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45},
-  {id: 4, lastName: 'Stark', firstName: 'Arya', age: 16},
-  {id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null},
-  {id: 6, lastName: 'Melisandre', firstName: null, age: 150},
-  {id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44},
-  {id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36},
-  {id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65},
 ]
 
 const TransactionsTable = ({transactions}) => {
@@ -52,17 +43,9 @@ const TransactionsTable = ({transactions}) => {
     })
   )
 
-  console.log(tableRows[0].categoryType)
-
   return (
     <div style={{height: 400, width: '100%'}}>
-      <DataGrid
-        // checkboxSelection
-        columns={columns}
-        pageSize={5}
-        rows={tableRows}
-        rowsPerPageOptions={[5]}
-      />
+      <DataGrid columns={columns} pageSize={5} rows={tableRows} rowsPerPageOptions={[5]} />
     </div>
   )
 }
