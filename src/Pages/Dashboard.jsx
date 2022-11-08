@@ -1,15 +1,28 @@
-import {Container, Typography, Grid} from '@mui/material'
+import {Container, Stack, Typography, Grid, Button} from '@mui/material'
+import {Navigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import AddCardIcon from '@mui/icons-material/AddCard'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 
-import useGetBalance from '../hooks/useBalance'
-import ExpensesChart from '../components/charts/ExpensesChart'
 import CustomCard from '../components/ui/Card'
+import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
 import TransactionsTable from '../components/ui/TransactionsTable'
+import useGetBalance from '../hooks/useBalance'
+import {useGetMe} from '../hooks/useUsers'
+import {authLogout} from '../app/authSlice'
 
 const Dashboard = () => {
-  const {data, isLoading, isError, error} = useGetBalance()
+  const {data, isLoading} = useGetBalance()
 
-  if (isLoading) return <h1>ESTO DEBERÍA SER UN SPINNER</h1>
+  const {data: me, isLoading: isLoadingMe} = useGetMe()
+
+  const dispatch = useDispatch()
+
+  if (isLoading || isLoadingMe) return <h1>ESTO DEBERÍA SER UN SPINNER</h1>
+
+  if (me.status === 'blocked') return <h1>CUENTA BLOQUEADA</h1>
 
   const {incomes, expenses, balance, transactions} = data
 
@@ -29,17 +42,43 @@ const Dashboard = () => {
         <CustomCard amount={balance} text="Balance" />
         <CustomCard amount={transactions.amount} text="Transacciones" />
       </Grid>
+      <Grid
+        container
+        alignContent="stretch"
+        direction="row"
+        gap={1}
+        justifyContent="flex-end"
+        my={1}
+        wrap="wrap"
+      >
+        <Button color="info" size="small" startIcon={<AddCardIcon />} variant="contained">
+          CARGAR SALDO
+        </Button>
+        <Button
+          color="secondary"
+          size="small"
+          startIcon={<CurrencyExchangeIcon />}
+          variant="contained"
+        >
+          TRANSFERIR
+        </Button>
+        <Button color="error" size="small" startIcon={<RequestQuoteIcon />} variant="contained">
+          CARGAR GASTO
+        </Button>
+      </Grid>
       {expenses.amount > 0 && (
         <div style={{marginTop: 16}}>
-          <Typography color="GrayColor" variant="button">
-            TOTAL DE GASTOS
-          </Typography>
-          <Grid container alignItems="center" mx={1}>
-            <Grid item lg={4} md={5} xs={12}>
-              <ExpensesChart obj={expenses.distribution} />
+          <Grid container alignItems="flex-start">
+            <Grid item lg={4} sm={6} xs={12}>
+              <Stack>
+                <Typography color="GrayColor" variant="button">
+                  TOTAL DE GASTOS
+                </Typography>
+                <ExpensesChart obj={expenses.distribution} />
+              </Stack>
             </Grid>
             <div style={{flex: 1}} />
-            <Grid item lg={6} md={7} xs={12}>
+            <Grid item lg={6} paddingY={3} sm={6} xs={12}>
               <ExpensesTable distribution={expenses.distribution} />
             </Grid>
           </Grid>
