@@ -22,6 +22,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
       field: 'amount',
       headerName: 'Monto',
       width: 120,
+      minWidth: 120,
       align: 'right',
       flex: 1,
       renderCell: ({row}) =>
@@ -39,6 +40,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
       field: 'flow',
       headerName: 'Tipo',
       width: 80,
+      minWidth: 80,
       align: 'center',
       renderCell: ({row}) =>
         row.flow === 'in' ? (
@@ -51,6 +53,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
       field: 'date',
       headerName: 'Fecha',
       width: 160,
+      minWidth: 160,
       align: 'left',
       flex: 2,
       renderCell: ({row}) => (
@@ -60,7 +63,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
     {
       field: 'category',
       headerName: 'Categoría',
-      width: 160,
+      minWidth: 160,
       align: 'left',
       flex: 2,
       renderCell: ({row}) => (
@@ -82,7 +85,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
     {
       field: 'concept',
       headerName: 'Descripción',
-      width: 250,
+      minWidth: 250,
       align: 'left',
       flex: 4,
       renderCell: ({row}) =>
