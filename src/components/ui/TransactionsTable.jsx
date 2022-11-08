@@ -1,52 +1,112 @@
-import {DataGrid} from '@mui/x-data-grid'
+import {DataGrid, esES} from '@mui/x-data-grid'
+import styled from '@emotion/styled'
+import {Paper, Typography} from '@mui/material'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 
-const columns = [
-  {
-    field: 'amount',
-    headerName: 'Amount',
-    type: 'number',
-    width: 60,
-    flex: 0.5,
-    description: 'Amount',
-    renderCell: (cellValues) => `$ ${cellValues.value}`,
-  },
-  {field: 'concept', headerName: 'Concept', width: 130, flex: 1, description: 'Concept'},
-  {field: 'date', headerName: 'Date', type: 'date', width: 130, flex: 1, description: 'Date'},
-  {
-    field: 'categoryName',
-    headerName: 'Category',
-    description: 'Category',
-    width: 160,
-    flex: 1,
-  },
-  {
-    field: 'categoryType',
-    headerName: 'Flow',
-    with: 130,
-    flex: 1,
-    description: 'Flow',
-    renderCell: (cellValues) => (
-      <div>{`${cellValues.value === 'in' ? '🟢' : '🔴'} ${cellValues.value}`}</div>
-    ),
-  },
-]
+import transformCurrency from '../../utils/transformCurrency'
+import transformDate from '../../utils/transformDate'
+
+const StyledDataGrid = styled(DataGrid)`
+  &.MuiDataGrid-root .MuiDataGrid-columnHeader,
+  &.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+  &.MuiDataGrid-root .MuiDataGrid-cell,
+  &.MuiDataGrid-root .MuiDataGrid-cell:focus {
+    outline: none;
+  }
+`
 
 const TransactionsTable = ({transactions}) => {
-  const tableRows = transactions.map(
-    ({amount, concept, transactionDate, category, flow}, index) => ({
-      id: index,
-      amount,
-      concept,
-      date: Date(transactionDate),
-      categoryName: category.name,
-      categoryType: flow,
-    })
-  )
+  const columns = [
+    {
+      field: 'amount',
+      headerName: 'Monto',
+      width: 120,
+      align: 'right',
+      flex: 1,
+      renderCell: ({row}) =>
+        row.flow === 'in' ? (
+          <Typography color="green" variant="button">
+            {transformCurrency(row.amount)}
+          </Typography>
+        ) : (
+          <Typography color="red" variant="button">
+            {transformCurrency(row.amount)}
+          </Typography>
+        ),
+    },
+    {
+      field: 'flow',
+      headerName: 'Tipo',
+      width: 80,
+      align: 'center',
+      renderCell: ({row}) =>
+        row.flow === 'in' ? (
+          <ArrowDropDownIcon sx={{color: 'green', fontSize: 36}} />
+        ) : (
+          <ArrowDropUpIcon sx={{color: 'red', fontSize: 36}} />
+        ),
+    },
+    {
+      field: 'date',
+      headerName: 'Fecha',
+      width: 160,
+      align: 'left',
+      flex: 2,
+      renderCell: ({row}) => (
+        <Typography variant="overline">{transformDate(row.transactionDate)}</Typography>
+      ),
+    },
+    {
+      field: 'category',
+      headerName: 'Categoría',
+      width: 160,
+      align: 'left',
+      flex: 2,
+      renderCell: ({row}) => (
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <Typography variant="overline">{row.category.name}</Typography>
+          {row.flow === 'in' && row.category.id === 1 && (
+            <Typography variant="caption">
+              De: {row.origin.firstName} {row.origin.lastName}{' '}
+            </Typography>
+          )}
+          {row.flow === 'out' && row.category.id === 1 && (
+            <Typography variant="caption">
+              Para: {row.destination.firstName} {row.destination.lastName}{' '}
+            </Typography>
+          )}
+        </div>
+      ),
+    },
+    {
+      field: 'concept',
+      headerName: 'Descripción',
+      width: 250,
+      align: 'left',
+      flex: 4,
+      renderCell: ({row}) =>
+        row.concept ? (
+          <Typography variant="overline">{row.concept}</Typography>
+        ) : (
+          <Typography variant="overline">Sin descripción</Typography>
+        ),
+    },
+  ]
 
   return (
-    <div style={{height: 400, width: '100%'}}>
-      <DataGrid columns={columns} pageSize={5} rows={tableRows} rowsPerPageOptions={[5]} />
-    </div>
+    <Paper style={{height: 473, width: '100%'}}>
+      <StyledDataGrid
+        disableSelectionOnClick
+        columns={columns}
+        getRowHeight={() => 60}
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+        pageSize={6}
+        rows={transactions}
+        rowsPerPageOptions={[6]}
+        sx={{fontFamily: 'Roboto Mono, monospace'}}
+      />
+    </Paper>
   )
 }
 

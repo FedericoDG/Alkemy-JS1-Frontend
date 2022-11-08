@@ -10,13 +10,15 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useState} from 'react'
+import MenuIcon from '@mui/icons-material/Menu'
 
 import {authLogout} from '../../app/authSlice'
 
 const ResponsiveAppBar = () => {
   const [drawerState, setDrawerState] = useState(false)
+  const {user} = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
@@ -35,7 +37,7 @@ const ResponsiveAppBar = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -75,10 +77,13 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}} />
 
-          <Box sx={{flexGrow: 0}}>
-            <Tooltip title="Open settings">
-              <IconButton sx={{p: 0}} onClick={toggleDrawer(true)}>
-                <Avatar alt="avatar" src="avatar.svg" sx={{width: 56, height: 56}} />
+          <Box sx={{flexGrow: 0, alignItems: 'center'}}>
+            <Typography color="inherit" variant="button">
+              {user.firstName} {user.lastName}
+            </Typography>
+            <Tooltip title="Abrir configuración">
+              <IconButton color="inherit" size="large" onClick={toggleDrawer(true)}>
+                <MenuIcon />
               </IconButton>
             </Tooltip>
           </Box>

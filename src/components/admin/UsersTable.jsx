@@ -1,5 +1,5 @@
 import {DataGrid, esES} from '@mui/x-data-grid'
-import {IconButton, Tooltip} from '@mui/material'
+import {IconButton, Paper, Tooltip} from '@mui/material'
 import {useDispatch} from 'react-redux'
 import CancelIcon from '@mui/icons-material/Cancel'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
@@ -126,7 +126,7 @@ const UsersTable = ({users}) => {
   ]
 
   return (
-    <div style={{height: 525, width: '100%'}}>
+    <Paper style={{height: 490, width: '100%'}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}
@@ -136,7 +136,7 @@ const UsersTable = ({users}) => {
         rows={users}
         rowsPerPageOptions={[10]}
       />
-    </div>
+    </Paper>
   )
 }
 

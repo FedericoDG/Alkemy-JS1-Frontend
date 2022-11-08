@@ -7,8 +7,6 @@ import AppRouter from './router/AppRouter'
 import store from './app/store'
 
 import 'react-toastify/dist/ReactToastify.css'
-import AdminDrawer from './components/admin/AdminDrawer'
-import ResetPasswordDialog from './components/admin/ResetPasswordDialog'
 
 const client = new QueryClient()
 
@@ -16,8 +14,6 @@ const App = () => (
   <Provider store={store}>
     <QueryClientProvider client={client}>
       <AppRouter />
-      <AdminDrawer />
-      <ResetPasswordDialog />
       <ToastContainer autoClose={2500} />
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
