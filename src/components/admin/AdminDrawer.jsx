@@ -15,7 +15,7 @@ const AdminDrawer = () => {
 
   const dispatch = useDispatch()
 
-  const {data: userDetails, isLoading} = useGetUserDetails(activeUserId)
+  const {data: userDetails} = useGetUserDetails(activeUserId)
 
   const handleClose = () => {
     dispatch(togleAdminDrawer())
