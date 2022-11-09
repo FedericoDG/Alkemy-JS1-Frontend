@@ -4,6 +4,9 @@ const initialState = {
   adminDrawer: false,
   resetPasswordModal: false,
   activeUserId: null,
+  addCreditDrawer: false,
+  transferenceDrawer: false,
+  addExpenseDrawer: false,
 }
 
 export const uiSlice = createSlice({
@@ -22,9 +25,28 @@ export const uiSlice = createSlice({
       ...state,
       activeUserId: action.payload,
     }),
+    toggleAddCreditDrawer: (state) => ({
+      ...state,
+      addCreditDrawer: !state.addCreditDrawer,
+    }),
+    toggleTransferenceDrawer: (state) => ({
+      ...state,
+      transferenceDrawer: !state.transferenceDrawer,
+    }),
+    toggleAddExpenseDrawer: (state) => ({
+      ...state,
+      addExpenseDrawer: !state.addExpenseDrawer,
+    }),
   },
 })
 
-export const {togleAdminDrawer, setActiveUser, toggleResetPasswordModal} = uiSlice.actions
+export const {
+  togleAdminDrawer,
+  setActiveUser,
+  toggleResetPasswordModal,
+  toggleAddCreditDrawer,
+  toggleTransferenceDrawer,
+  toggleAddExpenseDrawer,
+} = uiSlice.actions
 
 export default uiSlice.reducer
