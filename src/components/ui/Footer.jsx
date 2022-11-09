@@ -60,7 +60,13 @@ const Footer = () => (
           </IconButton>
         ))}
       </Divider>
-      <Typography fontSize="24px" fontWeight="lg" letterSpacing="8px" textcolor="neutral.500">
+      <Typography
+        fontSize="24px"
+        fontWeight="lg"
+        letterSpacing="8px"
+        textTransform="uppercase"
+        textcolor="neutral.500"
+      >
         AlkyBank
       </Typography>
       <Typography>©2022 JS Group 1</Typography>

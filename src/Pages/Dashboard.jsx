@@ -1,9 +1,10 @@
-import {Container, Typography, Grid} from '@mui/material'
+import {Container, Stack, Typography, Grid, Button} from '@mui/material'
 
-import useGetBalance from '../hooks/useBalance'
-import ExpensesChart from '../components/charts/ExpensesChart'
 import CustomCard from '../components/ui/Card'
+import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
+import useGetBalance from '../hooks/useBalance'
+import MovementsDialog from '../components/Shared/MovementsDialog/MovementsDialog'
 
 const Dashboard = () => {
   const {data, isLoading, isError, error} = useGetBalance()
@@ -28,17 +29,20 @@ const Dashboard = () => {
         <CustomCard amount={balance} text="Balance" />
         <CustomCard amount={transactions.amount} text="Transacciones" />
       </Grid>
+      <MovementsDialog />
       {expenses.amount > 0 && (
         <div style={{marginTop: 16}}>
-          <Typography color="GrayColor" variant="button">
-            TOTAL DE GASTOS
-          </Typography>
-          <Grid container alignItems="center" mx={1}>
-            <Grid item lg={4} md={5} xs={12}>
-              <ExpensesChart obj={expenses.distribution} />
+          <Grid container alignItems="flex-start" mx={1}>
+            <Grid item lg={4} sm={6} xs={12}>
+              <Stack>
+                <Typography color="GrayColor" variant="button">
+                  TOTAL DE GASTOS
+                </Typography>
+                <ExpensesChart obj={expenses.distribution} />
+              </Stack>
             </Grid>
             <div style={{flex: 1}} />
-            <Grid item lg={6} md={7} xs={12}>
+            <Grid item lg={6} sm={6} xs={12}>
               <ExpensesTable distribution={expenses.distribution} />
             </Grid>
           </Grid>

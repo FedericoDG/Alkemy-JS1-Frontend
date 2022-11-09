@@ -15,6 +15,8 @@ import {useState} from 'react'
 
 import {authLogout} from '../../app/authSlice'
 
+import HeaderDrawer from './HeaderDrawer'
+
 const ResponsiveAppBar = () => {
   const [drawerState, setDrawerState] = useState(false)
 
@@ -42,6 +44,7 @@ const ResponsiveAppBar = () => {
             noWrap
             component="a"
             href="/"
+            letterSpacing="8px"
             sx={{
               mr: 2,
               display: {xs: 'none', md: 'flex'},
@@ -84,14 +87,7 @@ const ResponsiveAppBar = () => {
           </Box>
         </Toolbar>
       </Container>
-      <Drawer anchor="bottom" open={drawerState} onClose={toggleDrawer(false)}>
-        <Box m={2} role="presentation" sx={{height: 500}}>
-          Editar perfil desde acá? Hacer transferencias? Hacer Pagos? Todo?
-          <Button type="button" onClick={() => handleLogout()}>
-            Salir
-          </Button>
-        </Box>
-      </Drawer>
+      <HeaderDrawer drawerState={drawerState} toggleDrawer={toggleDrawer} />
     </AppBar>
   )
 }
