@@ -1,8 +1,4 @@
-import {Container, Stack, Typography, Grid, Button} from '@mui/material'
-import {useDispatch} from 'react-redux'
-import AddCardIcon from '@mui/icons-material/AddCard'
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
+import {Container, Stack, Typography, Grid} from '@mui/material'
 
 import {useGetMe} from '../hooks/useUsers'
 import CustomCard from '../components/ui/Card'
@@ -11,21 +7,15 @@ import ExpensesTable from '../components/ui/ExpensesTable'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
 import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
-import {
-  toggleAddCreditDrawer,
-  toggleAddExpenseDrawer,
-  toggleTransferenceDrawer,
-} from '../app/uiSlice'
 import AddCreditDrawer from '../components/drawers/AddCreditDrawer'
 import AddExpenseDrawer from '../components/drawers/AddExpenseDrawer'
 import TransferenceDrawer from '../components/drawers/TransferenceDrawer'
+import Dialogs from '../components/Dialogs/Dialogs'
 
 const Dashboard = () => {
   const {data: me, isLoading: isLoadingMe} = useGetMe()
 
   const {data, isLoading} = useGetBalance()
-
-  const dispatch = useDispatch()
 
   if (isLoading || isLoadingMe) return <LoadingSpinner />
 
@@ -50,44 +40,7 @@ const Dashboard = () => {
           <CustomCard amount={balance} text="Balance" />
           <CustomCard amount={transactions.amount} text="Transacciones" />
         </Grid>
-        <Grid
-          container
-          alignContent="stretch"
-          direction="row"
-          gap={1}
-          justifyContent="flex-end"
-          mt={2}
-          my={1}
-          wrap="wrap"
-        >
-          <Button
-            color="info"
-            size="small"
-            startIcon={<AddCardIcon />}
-            variant="contained"
-            onClick={() => dispatch(toggleAddCreditDrawer())}
-          >
-            CARGAR SALDO
-          </Button>
-          <Button
-            color="secondary"
-            size="small"
-            startIcon={<CurrencyExchangeIcon />}
-            variant="contained"
-            onClick={() => dispatch(toggleTransferenceDrawer())}
-          >
-            TRANSFERIR
-          </Button>
-          <Button
-            color="error"
-            size="small"
-            startIcon={<RequestQuoteIcon />}
-            variant="contained"
-            onClick={() => dispatch(toggleAddExpenseDrawer())}
-          >
-            CARGAR GASTO
-          </Button>
-        </Grid>
+        <Dialogs />
         {expenses.amount > 0 && (
           <>
             <Typography color="GrayColor" variant="h4">
