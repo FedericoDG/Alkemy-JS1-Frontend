@@ -2,9 +2,13 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
 import Admin from '../pages/Admin'
 import Dashboard from '../pages/Dashboard'
+import Details from '../pages/Details'
 import Footer from '../components/ui/Footer'
+import FooterAdmin from '../components/admin/FooterAdmin'
 import LoginPage from '../pages/LoginPage'
+import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
 import RegisterPage from '../pages/RegisterPage'
+import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import ResponsiveAppBar from '../components/ui/Header'
 
 import AdminRoutes from './AdminRoutes'
@@ -34,7 +38,11 @@ const AppRoutes = () => (
             <ResponsiveAppBar />
             <Routes>
               <Route element={<Admin />} path="/" />
+              <Route element={<Details />} path="/user/:id" />
             </Routes>
+            <ProfileAdminDrawer />
+            <FooterAdmin />
+            <ResetPasswordDialog />
           </AdminRoutes>
         }
         path="/admin/*"
@@ -48,12 +56,12 @@ const AppRoutes = () => (
               <Route element={<Dashboard />} path="/" />
               {/* <Route element={<Error404 />} path="/*" /> */}
             </Routes>
+            <Footer />
           </PrivateRoutes>
         }
         path="/dashboard/*"
       />
     </Routes>
-    <Footer />
   </BrowserRouter>
 )
 

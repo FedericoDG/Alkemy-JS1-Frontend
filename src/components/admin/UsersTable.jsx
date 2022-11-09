@@ -1,13 +1,14 @@
 import {DataGrid, esES} from '@mui/x-data-grid'
 import {IconButton, Paper, Tooltip} from '@mui/material'
 import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import LockOpenIcon from '@mui/icons-material/LockOpen'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import LockResetIcon from '@mui/icons-material/LockReset'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import styled from '@emotion/styled'
 
-import {setActiveUser, toggleResetPasswordModal, togleAdminDrawer} from '../../app/uiSlice'
+import {setActiveUser, toggleResetPasswordModal} from '../../app/uiSlice'
 import {useBlockUser, useUnblockUser} from '../../hooks/useUsers'
 
 const StyledDataGrid = styled(DataGrid)`
@@ -25,9 +26,12 @@ const UsersTable = ({users}) => {
   const {mutate: blockUser} = useBlockUser()
   const {mutate: unblockUser} = useUnblockUser()
 
+  const navigate = useNavigate()
+
   const handleShowAdminDrawer = (id) => {
-    dispatch(togleAdminDrawer())
-    dispatch(setActiveUser(id))
+    navigate(`/admin/user/${id}`)
+    // dispatch(togleAdminDrawer())
+    // dispatch(setActiveUser(id))
   }
 
   const handleOpenDialog = (id) => {
@@ -126,15 +130,15 @@ const UsersTable = ({users}) => {
   ]
 
   return (
-    <Paper style={{height: 448, width: '100%'}}>
+    <Paper style={{height: 570, width: '100%'}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}
-        getRowHeight={() => 41}
+        getRowHeight={() => 45}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        pageSize={8}
+        pageSize={10}
         rows={users}
-        rowsPerPageOptions={[8]}
+        rowsPerPageOptions={[10]}
       />
     </Paper>
   )
