@@ -1,39 +1,15 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import {AppBar, Box, Container, IconButton, Toolbar, Tooltip, Typography} from '@mui/material'
 import {useDispatch, useSelector} from 'react-redux'
-import {useState} from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import {authLogout} from '../../app/authSlice'
+import {toggleProfileDrawer} from '../../app/uiSlice'
 
 const ResponsiveAppBar = () => {
-  const [drawerState, setDrawerState] = useState(false)
   const {user} = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
-  const handleLogout = () => dispatch(authLogout())
-
-  const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return
-    }
-
-    if (!open) {
-      console.log()
-    }
-
-    setDrawerState(open)
-  }
+  const handleOpenDrawer = () => dispatch(toggleProfileDrawer())
 
   return (
     <AppBar position="sticky">
@@ -81,21 +57,13 @@ const ResponsiveAppBar = () => {
               {user.firstName} {user.lastName}
             </Typography>
             <Tooltip title="Abrir configuración">
-              <IconButton color="inherit" size="large" onClick={toggleDrawer(true)}>
+              <IconButton color="inherit" size="large" onClick={handleOpenDrawer}>
                 <MenuIcon />
               </IconButton>
             </Tooltip>
           </Box>
         </Toolbar>
       </Container>
-      <Drawer anchor="bottom" open={drawerState} onClose={toggleDrawer(false)}>
-        <Box m={2} role="presentation" sx={{height: 500}}>
-          Editar perfil desde acá? Hacer transferencias? Hacer Pagos? Todo?
-          <Button type="button" onClick={() => handleLogout()}>
-            Salir
-          </Button>
-        </Box>
-      </Drawer>
     </AppBar>
   )
 }

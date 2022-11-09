@@ -10,6 +10,7 @@ const initialState = () => {
       loading: false,
       user: null,
       token: null,
+      avatar: '',
     }
   }
   const data = localStorage.read('alkybank')
@@ -37,6 +38,24 @@ export const authSlice = createSlice({
       user: null,
       token: null,
     }),
+    updateAvatar: (state, action) => ({
+      ...state,
+      user: {
+        user: {
+          ...state.user,
+          avatar: action.payload,
+        },
+      },
+    }),
+    updateProfile: (state, action) => ({
+      ...state,
+      user: {
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      },
+    }),
   },
   extraReducers: {
     [authLogin.pending]: (state) => ({
@@ -58,6 +77,8 @@ export const authSlice = createSlice({
 })
 
 const {logout} = authSlice.actions
+
+export const {updateAvatar, updateProfile} = authSlice.actions
 
 export const authLogout = () => (dispatch) => {
   auth.logout()

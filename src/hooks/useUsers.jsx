@@ -18,7 +18,8 @@ const userGetUsers = (onSuccess, onError) =>
   useQuery(['users'], fetchUsers, {
     onSuccess,
     onError,
-    select: (data) => data.body,
+    select: (data) =>
+      data.body.map((user) => ({...user, name: `${user.lastName} ${user.firstName}`})),
   })
 
 export const useGetMe = (onSuccess, onError) =>

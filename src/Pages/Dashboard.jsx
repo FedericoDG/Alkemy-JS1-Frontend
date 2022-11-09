@@ -2,15 +2,13 @@ import {Container, Stack, Typography, Grid} from '@mui/material'
 
 import {useGetMe} from '../hooks/useUsers'
 import CustomCard from '../components/ui/Card'
+import Dialogs from '../components/dialogs/Dialogs'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
+import ProfileDrawer from '../components/drawers/ProfileDrawer'
 import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
-import AddCreditDrawer from '../components/drawers/AddCreditDrawer'
-import AddExpenseDrawer from '../components/drawers/AddExpenseDrawer'
-import TransferenceDrawer from '../components/drawers/TransferenceDrawer'
-import Dialogs from '../components/Dialogs/Dialogs'
 
 const Dashboard = () => {
   const {data: me, isLoading: isLoadingMe} = useGetMe()
@@ -66,9 +64,7 @@ const Dashboard = () => {
           <TransactionsTable transactions={transactions.details} />
         </Stack>
       </Container>
-      <AddCreditDrawer />
-      <TransferenceDrawer />
-      <AddExpenseDrawer />
+      <ProfileDrawer />
     </>
   )
 }

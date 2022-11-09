@@ -1,36 +1,45 @@
-import {Box, Button, Dialog, DialogContent, DialogTitle, MenuItem} from '@mui/material'
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Dialog,
+  DialogContent,
+  Typography,
+  InputAdornment,
+} from '@mui/material'
+import {Form, Formik, ErrorMessage} from 'formik'
 import {useState} from 'react'
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
-import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
-import Input from '../Shared/Input'
-import styles from '../Shared/reusable.module.css'
-import Select from '../Shared/Select'
+import CustomSelect from '../Forms/CustomSelect'
+import CustomTextField from '../Forms/CustomTextField'
+import FormError from '../Forms/FormError'
+import useAddCredit from '../../hooks/useTransactions'
 import userGetUsers from '../../hooks/useUsers'
-import {postRequest} from '../../services/httpRequest'
+
+const validationSchema = Yup.object().shape({
+  amount: Yup.number().positive('El monto debe ser mayor a 0').required('Este campo es requerido'),
+  user: Yup.string().required('Este campo es requerido'),
+  concept: Yup.string(),
+})
 
 const TransactionDialog = () => {
-  const [openTransaction, setOpenTransaction] = useState(false)
-  const {data} = userGetUsers()
-  const filteredUsersId = data && data.map((user) => user.id)
-  const handleClickOpenTransaction = () => {
-    setOpenTransaction(true)
+  const [openIncome, setOpenIncome] = useState(false)
+
+  const {data: users} = userGetUsers()
+
+  const {mutate: transferTo, isLoading} = useAddCredit()
+
+  const handleClickOpenIncome = () => {
+    setOpenIncome(true)
   }
 
-  const handleCloseTransaction = () => {
-    setOpenTransaction(false)
+  const handleCloseIncome = () => {
+    setOpenIncome(false)
   }
-
-  const handleSubmit = (values) => {
-    postRequest('/transactions', values)
-  }
-
-  const validationSchema = Yup.object().shape({
-    destinationUserId: Yup.number().oneOf([filteredUsersId]).required(),
-    concept: Yup.string().required('Required'),
-    amount: Yup.number().positive().required('Required'),
-  })
 
   return (
     <>
@@ -39,49 +48,63 @@ const TransactionDialog = () => {
         size="small"
         startIcon={<CurrencyExchangeIcon />}
         variant="contained"
-        onClick={handleClickOpenTransaction}
+        onClick={handleClickOpenIncome}
       >
-        TRANSFERIR
+        Transferir
       </Button>
-      <Dialog open={openTransaction} onClose={handleCloseTransaction}>
-        <DialogTitle>Transferir</DialogTitle>
+      <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{categoryId: 1, concept: '', amount: '', destinationUserId: {}}}
+            initialValues={{amount: 0, user: '', concept: '', categoryId: 1}}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={(values) => {
+              transferTo({...values, destinationUserId: values.user})
+              setTimeout(() => {
+                setOpenIncome(false)
+              }, 1000)
+            }}
           >
-            {() => (
+            <Container
+              maxWidth="sm"
+              sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}
+            >
               <Box
-                component={Form}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
-                  gap: 1,
-                  pt: 2,
+                  alignItems: 'center',
                 }}
               >
-                <Select label="Contacto" name="destinationUserId" placeholder="Contacto">
-                  {data &&
-                    data.map((user) => (
-                      <MenuItem key={user.id} value={user.id}>
-                        {user.firstName} {user.lastName}
-                      </MenuItem>
-                    ))}
-                </Select>
-                <Input label="Concepto" name="concept" placeholder="Concepto" />
-                <Input label="Valor" name="amount" placeholder="Valor" type="number" />
-                <Button
-                  className={styles.button}
-                  disabled={false}
-                  type="submit"
-                  variant="contained"
-                >
-                  Transferir
-                </Button>
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                  <CurrencyExchangeIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Realizar Transferencia
+                </Typography>
+                <Box sx={{mt: 1}}>
+                  <Form style={{width: '100%'}}>
+                    <Stack p={1} spacing={1}>
+                      <CustomTextField
+                        InputProps={{
+                          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                        }}
+                        label="Monto"
+                        name="amount"
+                        style={{width: 250}}
+                        type="number"
+                      />
+                      <ErrorMessage component={FormError} name="amount" />
+                      <CustomSelect label="Usuario" name="user" options={users} />
+                      <CustomTextField label="Concepto" name="concept" style={{width: 250}} />
+                      <ErrorMessage component={FormError} name="concept" />
+                      <Button disabled={isLoading} type="submit" variant="contained">
+                        Aceptar
+                      </Button>
+                    </Stack>
+                  </Form>
+                </Box>
               </Box>
-            )}
+            </Container>
           </Formik>
         </DialogContent>
       </Dialog>

@@ -2,6 +2,7 @@ import {Container, Typography} from '@mui/material'
 
 import AdminDrawer from '../components/admin/AdminDrawer'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
+import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
 import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import userGetUsers from '../hooks/useUsers'
 import UsersTable from '../components/admin/UsersTable'
@@ -20,6 +21,7 @@ const Admin = () => {
         <UsersTable users={users} />
       </Container>
       <AdminDrawer />
+      <ProfileAdminDrawer />
       <ResetPasswordDialog />
     </>
   )

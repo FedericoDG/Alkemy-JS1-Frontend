@@ -1,97 +1,110 @@
-import {Box, Button, Dialog, DialogContent, DialogTitle, MenuItem} from '@mui/material'
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Dialog,
+  DialogContent,
+  Typography,
+  InputAdornment,
+} from '@mui/material'
+import {Form, Formik, ErrorMessage} from 'formik'
 import {useState} from 'react'
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
-import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
+import LocalAtmIcon from '@mui/icons-material/LocalAtm'
 
-import Input from '../Shared/Input'
-import styles from '../Shared/reusable.module.css'
+import CustomSelect from '../Forms/CustomSelect'
+import CustomTextField from '../Forms/CustomTextField'
+import FormError from '../Forms/FormError'
+import useAddCredit from '../../hooks/useTransactions'
 import useGetCategory from '../../hooks/useCategory'
-import {postRequest} from '../../services/httpRequest'
-import Select from '../Shared/Select'
-import NumberInput from '../Shared/NumberInput'
 
-const ExpensesDialog = () => {
-  const [openExpense, setOpenExpense] = useState(false)
-  const {data} = useGetCategory()
-  const filteredCategories = data && data.filter((category) => category.type === 'out')
-  const filteredCategoriesId =
-    filteredCategories && filteredCategories.map((category) => category.id)
+const validationSchema = Yup.object().shape({
+  amount: Yup.number().positive('El monto debe ser mayor a 0').required('Este campo es requerido'),
+  category: Yup.string().required('Este campo es requerido'),
+  concept: Yup.string(),
+})
 
-  const handleClickOpenExpense = () => {
-    setOpenExpense(true)
+const TransactionDialog = () => {
+  const [openIncome, setOpenIncome] = useState(false)
+
+  const {data: categories} = useGetCategory()
+
+  const {mutate: transferTo, isLoading} = useAddCredit()
+
+  const handleClickOpenIncome = () => {
+    setOpenIncome(true)
   }
 
-  const handleCloseExpense = () => {
-    setOpenExpense(false)
+  const handleCloseIncome = () => {
+    setOpenIncome(false)
   }
-
-  const handleSubmit = (values) => {
-    postRequest('/transactions', values)
-  }
-
-  const validationSchema = Yup.object().shape({
-    categoryId: Yup.number().oneOf([filteredCategoriesId]).required(),
-    concept: Yup.string().required('Required'),
-    amount: Yup.number().positive().required('Required'),
-  })
 
   return (
     <>
       <Button
-        color="info"
+        color="error"
         size="small"
-        startIcon={<RequestQuoteIcon />}
+        startIcon={<LocalAtmIcon />}
         variant="contained"
-        onClick={handleClickOpenExpense}
+        onClick={handleClickOpenIncome}
       >
-        CARGAR GASTO
+        Cargar Gasto
       </Button>
-      <Dialog open={openExpense} onClose={handleCloseExpense}>
-        <DialogTitle>Cargar Gasto</DialogTitle>
+      <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{
-              categoryId: {},
-              concept: '',
-              amount: '',
-              destinationId: 1,
-            }}
+            initialValues={{amount: 0, category: '', concept: '', categoryId: ''}}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={(values) => {
+              transferTo({...values, categoryId: values.category})
+              setTimeout(() => {
+                setOpenIncome(false)
+              }, 1000)
+            }}
           >
-            {() => (
+            <Container
+              maxWidth="sm"
+              sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}
+            >
               <Box
-                component={Form}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
-                  gap: 1,
-                  pt: 2,
+                  alignItems: 'center',
                 }}
               >
-                <Select label="Categoría" name="categoryId" placeholder="Categoría">
-                  {filteredCategories &&
-                    filteredCategories.map((expense) => (
-                      <MenuItem key={expense.id} value={expense.id}>
-                        {expense.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-                <Input label="Concepto" name="concept" placeholder="Concepto" />
-                <NumberInput label="Valor" name="amount" placeholder="Valor" type="number" />
-
-                <Button
-                  className={styles.button}
-                  disabled={false}
-                  type="submit"
-                  variant="contained"
-                >
+                <Avatar sx={{m: 1, bgcolor: 'error.main'}}>
+                  <LocalAtmIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
                   Cargar Gasto
-                </Button>
+                </Typography>
+                <Box sx={{mt: 1}}>
+                  <Form style={{width: '100%'}}>
+                    <Stack p={1} spacing={1}>
+                      <CustomTextField
+                        InputProps={{
+                          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                        }}
+                        label="Monto"
+                        name="amount"
+                        style={{width: 250}}
+                        type="number"
+                      />
+                      <ErrorMessage component={FormError} name="amount" />
+                      <CustomSelect label="Categoría" name="category" options={categories} />
+                      <CustomTextField label="Concepto" name="concept" style={{width: 250}} />
+                      <ErrorMessage component={FormError} name="concept" />
+                      <Button disabled={isLoading} type="submit" variant="contained">
+                        Aceptar
+                      </Button>
+                    </Stack>
+                  </Form>
+                </Box>
               </Box>
-            )}
+            </Container>
           </Formik>
         </DialogContent>
       </Dialog>
@@ -99,4 +112,4 @@ const ExpensesDialog = () => {
   )
 }
 
-export default ExpensesDialog
+export default TransactionDialog

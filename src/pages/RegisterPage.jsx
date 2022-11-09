@@ -1,4 +1,4 @@
-import Register from '../components/Register/Register'
+import Register from '../components/register/Register'
 import imgLogin from '../assets/register_image.jpg'
 
 import styles from './styles.module.css'
