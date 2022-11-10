@@ -73,7 +73,7 @@ const EditCategoryDialog = () => {
                   alignItems: 'center',
                 }}
               >
-                <Avatar sx={{m: 1, bgcolor: 'error.secondary'}}>
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                   <CategoryIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
