@@ -16,13 +16,12 @@ import CategoryIcon from '@mui/icons-material/Category'
 import CustomSelect from '../Forms/CustomSelect'
 import CustomTextField from '../Forms/CustomTextField'
 import FormError from '../Forms/FormError'
-import useAddCredit from '../../hooks/useTransactions'
-import useGetCategory from '../../hooks/useCategory'
+import useGetCategory, {useEditCategory} from '../../hooks/useCategory'
 
 const validationSchema = Yup.object().shape({
-  amount: Yup.number().positive('El monto debe ser mayor a 0').required('Este campo es requerido'),
+  name: Yup.string().required('Este campo es requerido'),
   category: Yup.string().required('Este campo es requerido'),
-  concept: Yup.string(),
+  description: Yup.string(),
 })
 
 const EditCategoryDialog = () => {
@@ -30,7 +29,7 @@ const EditCategoryDialog = () => {
 
   const {data: categories} = useGetCategory()
 
-  const {mutate: transferTo, isLoading} = useAddCredit()
+  const {mutate: editCategory} = useEditCategory()
 
   const handleClickOpenIncome = () => {
     setOpenIncome(true)
@@ -43,7 +42,7 @@ const EditCategoryDialog = () => {
   return (
     <>
       <Button
-        color="error"
+        color="secondary"
         size="small"
         startIcon={<CategoryIcon />}
         variant="contained"
@@ -54,10 +53,10 @@ const EditCategoryDialog = () => {
       <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{name: '', category: '', description: '', categoryId: ''}}
+            initialValues={{name: '', category: '', description: '', type: 'out'}}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              transferTo({...values, categoryId: values.category})
+              editCategory({id: values.category, ...values})
               setTimeout(() => {
                 setOpenIncome(false)
               }, 1000)
@@ -74,7 +73,7 @@ const EditCategoryDialog = () => {
                   alignItems: 'center',
                 }}
               >
-                <Avatar sx={{m: 1, bgcolor: 'error.main'}}>
+                <Avatar sx={{m: 1, bgcolor: 'error.secondary'}}>
                   <CategoryIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -92,7 +91,7 @@ const EditCategoryDialog = () => {
                         style={{width: 250}}
                       />
                       <ErrorMessage component={FormError} name="description" />
-                      <Button disabled={isLoading} type="submit" variant="contained">
+                      <Button type="submit" variant="contained">
                         Aceptar
                       </Button>
                     </Stack>

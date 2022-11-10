@@ -50,9 +50,9 @@ export const useCreateUser = () => {
   const navigate = useNavigate()
 
   return useMutation(createUser, {
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.invalidateQueries('users')
-      notification('success', 'Usuario creado', 'light')
+      notification('success', res.message, 'light')
       navigate('/login')
     },
     onError: (error) => {
@@ -65,9 +65,9 @@ export const useBlockUser = () => {
   const queryClient = useQueryClient()
 
   return useMutation(blockUser, {
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.invalidateQueries('users')
-      notification('success', 'Usuario bloqueado', 'light')
+      notification('success', res.message, 'light')
     },
   })
 }
