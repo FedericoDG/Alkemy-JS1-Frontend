@@ -1,29 +1,24 @@
 import {Container, Typography} from '@mui/material'
 
-import AdminDrawer from '../components/admin/AdminDrawer'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
-import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
-import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import userGetUsers from '../hooks/useUsers'
 import UsersTable from '../components/admin/UsersTable'
+import useGetCategory from '../hooks/useCategory'
 
 const Admin = () => {
   const {data: users, isLoading} = userGetUsers()
 
-  if (isLoading) return <LoadingSpinner />
+  const {data: categories, isLoading: isLoadingCategories} = useGetCategory()
+
+  if (isLoading || isLoadingCategories) return <LoadingSpinner />
 
   return (
-    <>
-      <Container maxWidth="xl" sx={{paddingY: 2, height: 'calc(100vh - 208px)'}}>
-        <Typography color="GrayColor" variant="h4">
-          Usuarios
-        </Typography>
-        <UsersTable users={users} />
-      </Container>
-      <AdminDrawer />
-      <ProfileAdminDrawer />
-      <ResetPasswordDialog />
-    </>
+    <Container maxWidth="xl" sx={{paddingY: 2, height: 'calc(100vh - 120px)'}}>
+      <Typography color="GrayColor" variant="h4">
+        Usuarios
+      </Typography>
+      <UsersTable users={users} />
+    </Container>
   )
 }
 

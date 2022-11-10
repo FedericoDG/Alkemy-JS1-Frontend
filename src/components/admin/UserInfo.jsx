@@ -19,6 +19,7 @@ import LockResetIcon from '@mui/icons-material/LockReset'
 
 import {useBlockUser, useDeleteUser, useUnblockUser} from '../../hooks/useUsers'
 import {setActiveUser, toggleResetPasswordModal, togleAdminDrawer} from '../../app/uiSlice'
+import avatar from '../../assets/avatar.svg'
 
 const UserInfo = ({user}) => {
   const {mutate: blockUser} = useBlockUser()
@@ -53,7 +54,7 @@ const UserInfo = ({user}) => {
           <Box
             alt="The house from the offer."
             component="img"
-            src={user.avatar ? user.avatar : 'avatar.svg'}
+            src={user.avatar ? user.avatar : avatar}
             sx={{
               height: 233,
               width: 350,
@@ -83,7 +84,7 @@ const UserInfo = ({user}) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" width={500}>
+      <Grid container justifyContent="center" width={474}>
         <Grid item sx={{padding: 1}} xs={6}>
           <Button
             fullWidth
