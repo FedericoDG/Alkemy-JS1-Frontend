@@ -22,6 +22,8 @@ import {setActiveUser, toggleResetPasswordModal, togleAdminDrawer} from '../../a
 import avatar from '../../assets/avatar.svg'
 
 const UserInfo = ({user}) => {
+  console.log(user)
+
   const {mutate: blockUser} = useBlockUser()
   const {mutate: unblockUser} = useUnblockUser()
   const {mutate: deleteUser} = useDeleteUser()
@@ -52,18 +54,18 @@ const UserInfo = ({user}) => {
       <Grid container>
         <Grid item>
           <Box
-            alt="The house from the offer."
+            alt="avatar"
             component="img"
             src={user.avatar ? user.avatar : avatar}
             sx={{
-              height: 233,
-              width: 350,
-              maxHeight: {xs: 233, md: 167},
-              maxWidth: {xs: 350, md: 250},
+              height: 200,
+              width: 200,
+              margin: '0 auto',
+              borderRadius: 50,
             }}
           />
         </Grid>
-        <Grid item>
+        <Grid item sx={{marginLeft: 7}}>
           <TableContainer component={Paper} elevation={0}>
             <Table>
               <TableHead>

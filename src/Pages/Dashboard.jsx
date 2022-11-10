@@ -6,7 +6,7 @@ import Dialogs from '../components/dialogs/Dialogs'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
-import ProfileDrawer from '../components/drawers/ProfileDrawer'
+import ProfileDrawer from '../components/drawers/UserDrawer/UserDrawar'
 import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
 
