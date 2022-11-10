@@ -1,16 +1,24 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import {useNavigate} from 'react-router-dom'
 
-import {deleteRequest, getRequest, patchRequest, postRequest} from '../services/httpRequest'
+import {
+  deleteRequest,
+  getRequest,
+  patchRequest,
+  postRequest,
+  putRequest,
+} from '../services/httpRequest'
 import notification from '../utils/notification'
 
 const fetchUsers = () => getRequest('/users/')
-const fetchMe = () => getRequest('/auth/me')
+const fetchMe = () => getRequest('/auth/me/')
 const fetchUserDetails = (id) => getRequest(`/users/${id}`)
 const createUser = (user) => postRequest('/users/', user)
 const blockUser = (id) => patchRequest(`/users/block/${id}`)
 const unblockUser = (id) => patchRequest(`/users/unblock/${id}`)
 const resetUserPassword = (user) => patchRequest(`/users/resetpassword/${user.id}`, user.password)
+const updateUser = (user) => putRequest(`/users/${user.id}`, user)
+
 const deleteUser = (id) => deleteRequest(`/users/${id}`)
 
 // FETCH
@@ -82,6 +90,20 @@ export const useResetUserPassword = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('users')
       notification('success', 'Contraseña reseteada', 'light')
+    },
+  })
+}
+
+export const useUpdateUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation(updateUser, {
+    onSuccess: (res) => {
+      queryClient.invalidateQueries('me')
+      notification('success', res.message, 'light')
+    },
+    onError: (error) => {
+      notification('error', `${error.response.data.message}`)
     },
   })
 }

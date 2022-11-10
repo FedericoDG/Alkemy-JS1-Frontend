@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
 import auth from '../services/auth'
 import localStorage from '../utils/localStorage'
+import setAvatarFunc from '../services/setAvatar'
 
 const initialState = () => {
   if (!localStorage.read('alkybank')) {
@@ -27,6 +28,8 @@ export const authLogin = createAsyncThunk('[auth]/login', ({email, password}, th
   auth.login(email, password, thunkAPI)
 )
 
+export const setAvatar = createAsyncThunk('[auth]/avatar', (formData) => setAvatarFunc(formData))
+
 export const authSlice = createSlice({
   name: '[auth]',
   initialState: initialState(),
@@ -41,19 +44,15 @@ export const authSlice = createSlice({
     updateAvatar: (state, action) => ({
       ...state,
       user: {
-        user: {
-          ...state.user,
-          avatar: action.payload,
-        },
+        ...state.user,
+        avatar: action.payload,
       },
     }),
     updateProfile: (state, action) => ({
       ...state,
       user: {
-        user: {
-          ...state.user,
-          ...action.payload,
-        },
+        ...state.user,
+        ...action.payload,
       },
     }),
   },
@@ -70,6 +69,23 @@ export const authSlice = createSlice({
       token: action.payload.token,
     }),
     [authLogin.rejected]: (state) => ({
+      ...state,
+      loading: false,
+    }),
+    [setAvatar.pending]: (state) => ({
+      ...state,
+      loading: true,
+    }),
+    [setAvatar.fulfilled]: (state, action) => ({
+      ...state,
+      loading: false,
+      logged: true,
+      user: {
+        ...state.user,
+        avatar: action.payload,
+      },
+    }),
+    [setAvatar.rejected]: (state) => ({
       ...state,
       loading: false,
     }),
