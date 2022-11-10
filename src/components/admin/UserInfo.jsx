@@ -22,8 +22,6 @@ import {setActiveUser, toggleResetPasswordModal, togleAdminDrawer} from '../../a
 import avatar from '../../assets/avatar.svg'
 
 const UserInfo = ({user}) => {
-  console.log(user)
-
   const {mutate: blockUser} = useBlockUser()
   const {mutate: unblockUser} = useUnblockUser()
   const {mutate: deleteUser} = useDeleteUser()

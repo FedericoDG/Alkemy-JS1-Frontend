@@ -41,13 +41,20 @@ const UserForm = () => {
             <ErrorMessage component={FormError} name="firstName" />
             <CustomTextField fullWidth label="Apellido" name="lastName" style={{width: 345}} />
             <ErrorMessage component={FormError} name="lastName" />
-            <CustomTextField fullWidth label="Contraseña" name="password" style={{width: 345}} />
+            <CustomTextField
+              fullWidth
+              label="Contraseña"
+              name="password"
+              style={{width: 345}}
+              type="password"
+            />
             <ErrorMessage component={FormError} name="password" />
             <CustomTextField
               fullWidth
               label="Repetir contraseña"
               name="repeatPassword"
               style={{width: 345}}
+              type="password"
             />
             <ErrorMessage component={FormError} name="repeatPassword" />
             <Button disabled={false} type="submit" variant="contained">
