@@ -1,6 +1,7 @@
 .container {
   display: flex;
   height: calc(100vh - 144px);
+  background-color: white;
 }
 
 .container .boxImg {
