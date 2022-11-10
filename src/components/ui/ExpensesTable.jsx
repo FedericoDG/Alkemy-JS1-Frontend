@@ -9,21 +9,12 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-/* import {tableCellClasses} from '@mui/material/TableCell' */
 
 import generateColor from '../../utils/generateColor'
 
 const ExpensesTable = ({distribution}) => (
   <TableContainer component={Paper}>
-    <Table
-      aria-label="simple table"
-      size="small"
-      /*  sx={{
-        [`& .${tableCellClasses.root}`]: {
-          borderBottom: 'none',
-        },
-      }} */
-    >
+    <Table aria-label="simple table" size="small">
       <TableHead>
         <TableRow>
           <TableCell>Gastos</TableCell>
