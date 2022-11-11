@@ -43,7 +43,7 @@ const SignIn = () => {
           <Box sx={{mt: 1}}>
             <Form style={{width: '100%'}}>
               <Stack p={1} spacing={1}>
-                <CustomTextField label="Email" name="email" style={{width: 360}} />
+                <CustomTextField autoFocus label="Email" name="email" style={{width: 360}} />
                 <ErrorMessage component={FormError} name="email" />
                 <CustomTextField
                   fullWidth

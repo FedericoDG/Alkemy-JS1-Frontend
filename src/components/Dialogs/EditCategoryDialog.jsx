@@ -57,9 +57,7 @@ const EditCategoryDialog = () => {
             validationSchema={validationSchema}
             onSubmit={(values) => {
               editCategory({id: values.category, ...values})
-              setTimeout(() => {
-                setOpenIncome(false)
-              }, 1000)
+              setOpenIncome(false)
             }}
           >
             <Container
@@ -82,7 +80,12 @@ const EditCategoryDialog = () => {
                 <Box sx={{mt: 1}}>
                   <Form style={{width: '100%'}}>
                     <Stack p={1} spacing={1}>
-                      <CustomSelect label="Categoría" name="category" options={categories} />
+                      <CustomSelect
+                        autoFocus
+                        label="Categoría"
+                        name="category"
+                        options={categories}
+                      />
                       <CustomTextField label="Nuevo Nombre" name="name" style={{width: 250}} />
                       <ErrorMessage component={FormError} name="name" />
                       <CustomTextField
