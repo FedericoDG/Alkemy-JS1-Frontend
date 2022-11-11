@@ -59,9 +59,7 @@ const TransactionDialog = () => {
             validationSchema={validationSchema}
             onSubmit={(values) => {
               transferTo({...values, categoryId: values.category})
-              setTimeout(() => {
-                setOpenIncome(false)
-              }, 1000)
+              setOpenIncome(false)
             }}
           >
             <Container
@@ -85,6 +83,7 @@ const TransactionDialog = () => {
                   <Form style={{width: '100%'}}>
                     <Stack p={1} spacing={1}>
                       <CustomTextField
+                        autoFocus
                         InputProps={{
                           startAdornment: <InputAdornment position="start">$</InputAdornment>,
                         }}

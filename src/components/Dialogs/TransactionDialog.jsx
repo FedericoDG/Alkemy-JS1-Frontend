@@ -10,6 +10,8 @@ import {
   InputAdornment,
 } from '@mui/material'
 import {Form, Formik, ErrorMessage} from 'formik'
+import {io} from 'socket.io-client'
+import {useSelector} from 'react-redux'
 import {useState} from 'react'
 import * as Yup from 'yup'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
@@ -17,6 +19,7 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 import CustomSelect from '../Forms/CustomSelect'
 import CustomTextField from '../Forms/CustomTextField'
 import FormError from '../Forms/FormError'
+import socketIO from '../../services/socket'
 import useAddCredit from '../../hooks/useTransactions'
 import userGetUsers from '../../hooks/useUsers'
 
@@ -27,11 +30,14 @@ const validationSchema = Yup.object().shape({
 })
 
 const TransactionDialog = () => {
+  const {user} = useSelector((state) => state.auth)
   const [openIncome, setOpenIncome] = useState(false)
 
   const {data: users} = userGetUsers()
 
   const {mutate: transferTo, isLoading} = useAddCredit()
+
+  const socket = socketIO()
 
   const handleClickOpenIncome = () => {
     setOpenIncome(true)
@@ -58,10 +64,14 @@ const TransactionDialog = () => {
             initialValues={{amount: 0, user: '', concept: '', categoryId: 1}}
             validationSchema={validationSchema}
             onSubmit={(values) => {
+              socket.emit('join_channel', values.user)
+              socket.emit('send_transaction', {
+                message: 'Transferencia recibida',
+                channel: values.user,
+              })
+              socket.emit('join_channel', user.id)
               transferTo({...values, destinationUserId: values.user})
-              setTimeout(() => {
-                setOpenIncome(false)
-              }, 1000)
+              setOpenIncome(false)
             }}
           >
             <Container
@@ -85,6 +95,7 @@ const TransactionDialog = () => {
                   <Form style={{width: '100%'}}>
                     <Stack p={1} spacing={1}>
                       <CustomTextField
+                        autoFocus
                         InputProps={{
                           startAdornment: <InputAdornment position="start">$</InputAdornment>,
                         }}

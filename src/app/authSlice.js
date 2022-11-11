@@ -11,7 +11,6 @@ const initialState = () => {
       loading: false,
       user: null,
       token: null,
-      avatar: '',
     }
   }
   const data = localStorage.read('alkybank')
@@ -67,6 +66,7 @@ export const authSlice = createSlice({
       logged: true,
       user: {...action.payload.user},
       token: action.payload.token,
+      channel: action.payload.user.id,
     }),
     [authLogin.rejected]: (state) => ({
       ...state,

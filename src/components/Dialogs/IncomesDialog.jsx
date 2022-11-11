@@ -54,9 +54,7 @@ const IncomesDialog = () => {
             validationSchema={validationSchemaIncomes}
             onSubmit={(values) => {
               addCredit(values)
-              setTimeout(() => {
-                setOpenIncome(false)
-              }, 1000)
+              setOpenIncome(false)
             }}
           >
             <Container
@@ -80,6 +78,7 @@ const IncomesDialog = () => {
                   <Form style={{width: '100%'}}>
                     <Stack p={1} spacing={1}>
                       <CustomTextField
+                        autoFocus
                         InputProps={{
                           startAdornment: <InputAdornment position="start">$</InputAdornment>,
                         }}

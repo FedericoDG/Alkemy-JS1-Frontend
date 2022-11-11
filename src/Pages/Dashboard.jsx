@@ -1,4 +1,6 @@
 import {Container, Stack, Typography, Grid} from '@mui/material'
+import {useEffect} from 'react'
+import {useSelector} from 'react-redux'
 
 import {useGetMe} from '../hooks/useUsers'
 import CustomCard from '../components/ui/Card'
@@ -6,14 +8,33 @@ import Dialogs from '../components/dialogs/Dialogs'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
+import notification from '../utils/notification'
 import ProfileDrawer from '../components/drawers/UserDrawer/UserDrawar'
+import socketIO from '../services/socket'
 import TransactionsTable from '../components/ui/TransactionsTable'
 import useGetBalance from '../hooks/useBalance'
 
 const Dashboard = () => {
+  const {user} = useSelector((state) => state.auth)
+
   const {data: me, isLoading: isLoadingMe} = useGetMe()
 
   const {data, isLoading} = useGetBalance()
+
+  const socket = socketIO()
+
+  useEffect(() => {
+    socket.emit('join_channel', user.id)
+
+    socket.on('income_transaction', (data) => {
+      notification('success', data)
+    })
+
+    return () => {
+      socket.off('join_channel')
+      socket.off('income_transaction')
+    }
+  }, [])
 
   if (isLoading || isLoadingMe) return <LoadingSpinner />
 

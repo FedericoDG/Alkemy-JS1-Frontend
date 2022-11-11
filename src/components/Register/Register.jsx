@@ -64,7 +64,7 @@ const Register = () => {
           <Box sx={{mt: 1}}>
             <Form style={{width: '100%'}}>
               <Stack p={1} spacing={1}>
-                <CustomTextField label="Nombre" name="firstName" style={{width: 360}} />
+                <CustomTextField autoFocus label="Nombre" name="firstName" style={{width: 360}} />
                 <ErrorMessage component={FormError} name="firstName" />
                 <CustomTextField label="Apellido" name="lastName" style={{width: 360}} />
                 <ErrorMessage component={FormError} name="lastName" />
