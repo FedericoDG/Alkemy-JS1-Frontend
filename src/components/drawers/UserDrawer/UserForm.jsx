@@ -22,6 +22,7 @@ const UserForm = () => {
       initialValues={{
         firstName: user.firstName,
         lastName: user.lastName,
+        address: user.address,
         password: '',
         repeatPassword: '',
       }}
@@ -31,30 +32,63 @@ const UserForm = () => {
         setTimeout(() => {
           dispatch(toggleProfileDrawer())
         }, 1000)
-        dispatch(updateProfile({firstName: values.firstName, lastName: values.lastName}))
+        dispatch(
+          updateProfile({
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            password: values.password,
+          })
+        )
       }}
     >
-      <Box m={2} role="presentation" sx={{width: 360}}>
+      <Box m={1} role="presentation" sx={{width: 360}}>
         <Form style={{width: '100%'}}>
-          <Stack p={1} spacing={1}>
-            <CustomTextField label="Nombre" name="firstName" style={{width: 345}} />
+          <Stack p={1} spacing={2}>
+            <CustomTextField
+              label="Nombre"
+              name="firstName"
+              size="small"
+              style={{width: 345}}
+              variant="standard"
+            />
             <ErrorMessage component={FormError} name="firstName" />
-            <CustomTextField fullWidth label="Apellido" name="lastName" style={{width: 345}} />
+            <CustomTextField
+              fullWidth
+              label="Apellido"
+              name="lastName"
+              size="small"
+              style={{width: 345}}
+              variant="standard"
+            />
             <ErrorMessage component={FormError} name="lastName" />
+            <CustomTextField
+              fullWidth
+              label="Dirección"
+              name="address"
+              size="small"
+              style={{width: 345}}
+              variant="standard"
+            />
+            <ErrorMessage component={FormError} name="address" />
             <CustomTextField
               fullWidth
               label="Contraseña"
               name="password"
+              size="small"
               style={{width: 345}}
               type="password"
+              variant="standard"
             />
             <ErrorMessage component={FormError} name="password" />
             <CustomTextField
               fullWidth
               label="Repetir contraseña"
               name="repeatPassword"
+              size="small"
               style={{width: 345}}
               type="password"
+              variant="standard"
             />
             <ErrorMessage component={FormError} name="repeatPassword" />
             <Button disabled={false} type="submit" variant="contained">

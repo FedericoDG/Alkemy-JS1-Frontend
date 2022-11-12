@@ -1,6 +1,8 @@
 import {blue, cyan, green, pink} from '@mui/material/colors'
 import {Card, CardContent, Grid, Typography} from '@mui/material'
 
+import transformCurrency from '../../utils/transformCurrency'
+
 const colorCyan = cyan.A400
 const colorGreen = green[300]
 const colorLightBlue = blue[500]
@@ -30,10 +32,10 @@ const CustomCard = ({amount, text}) => {
 
   return (
     <Grid item md={3} xs={6}>
-      <Card sx={{minWidth: 180}}>
+      <Card sx={{minWidth: 160}}>
         <CardContent>
           <Typography color={color} component="div" textAlign="center" variant="h6">
-            {text === 'Transacciones' ? amount : `$${amount}`}
+            {text === 'Transacciones' ? amount : transformCurrency(amount)}
           </Typography>
           <Typography color="GrayText" component="div" textAlign="center" variant="body2">
             {text}

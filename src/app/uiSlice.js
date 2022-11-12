@@ -1,9 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-  adminDrawer: false,
   resetPasswordModal: false,
-  activeUserId: null,
   profileDrawer: false,
 }
 
@@ -11,10 +9,6 @@ export const uiSlice = createSlice({
   name: '[ui]',
   initialState,
   reducers: {
-    togleAdminDrawer: (state) => ({
-      ...state,
-      adminDrawer: !state.adminDrawer,
-    }),
     toggleResetPasswordModal: (state) => ({
       ...state,
       resetPasswordModal: !state.resetPasswordModal,

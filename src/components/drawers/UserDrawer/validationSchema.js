@@ -7,6 +7,7 @@ const validationSchema = Yup.object({
   lastName: Yup.string()
     .min(3, 'El apellido debe tener al menos 3 caracters')
     .required('Este campo es requerido'),
+  address: Yup.string(),
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters')
     .required('Este campo es requerido')

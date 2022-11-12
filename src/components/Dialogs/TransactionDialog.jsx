@@ -53,6 +53,7 @@ const TransactionDialog = () => {
         color="secondary"
         size="small"
         startIcon={<CurrencyExchangeIcon />}
+        sx={{width: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >

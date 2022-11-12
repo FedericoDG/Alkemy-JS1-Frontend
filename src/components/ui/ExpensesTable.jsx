@@ -11,10 +11,11 @@ import {
 } from '@mui/material'
 
 import generateColor from '../../utils/generateColor'
+import transformCurrency from '../../utils/transformCurrency'
 
 const ExpensesTable = ({distribution}) => (
   <TableContainer component={Paper}>
-    <Table aria-label="simple table" size="small">
+    <Table size="small">
       <TableHead>
         <TableRow>
           <TableCell>Gastos</TableCell>
@@ -43,7 +44,7 @@ const ExpensesTable = ({distribution}) => (
                   {row.name}
                 </Typography>
               </TableCell>
-              <TableCell align="right">$ {row.total}</TableCell>
+              <TableCell align="right">{transformCurrency(row.total)}</TableCell>
               <TableCell align="right">{Number(row.percentage).toFixed(2)} %</TableCell>
             </TableRow>
           )

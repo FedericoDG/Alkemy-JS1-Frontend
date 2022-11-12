@@ -64,7 +64,7 @@ const UserInfo = ({user}) => {
           />
         </Grid>
         <Grid item sx={{marginLeft: 7}}>
-          <TableContainer component={Paper} elevation={0}>
+          <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
