@@ -2,12 +2,12 @@
   display: flex;
   height: 100vh;
   background-color: white;
+  background-image: url('./waves.svg');
 }
 
 .container .boxImg {
   display: flex;
   flex: 1;
-  box-shadow: -2px -1px 13px 0px rgba(0, 0, 0, 0.75);
 }
 
 .container .boxImg img {
@@ -20,14 +20,4 @@
   .container .boxImg {
     display: none;
   }
-}
-
-.background {
-  background: #ece9e6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffffff, #ece9e6); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #ece9e6
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

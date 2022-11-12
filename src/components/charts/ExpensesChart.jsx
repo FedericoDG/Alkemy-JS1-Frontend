@@ -6,7 +6,7 @@ import generateColor from '../../utils/generateColor'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const ExpensesChart = ({obj, displayLabel = true}) => {
-  const coso = {
+  const data = {
     labels: obj.map((el) => el.name),
     datasets: [
       {
@@ -21,16 +21,16 @@ const ExpensesChart = ({obj, displayLabel = true}) => {
 
   return (
     <Doughnut
-      data={coso}
+      data={data}
       options={{
         plugins: {
           legend: {
             display: displayLabel,
             position: 'bottom',
           },
+          usePointStyle: true,
+          boxWidth: 6,
         },
-        responsive: true,
-        maintainAspectRatio: true,
       }}
     />
   )

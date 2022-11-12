@@ -24,6 +24,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
       width: 120,
       minWidth: 120,
       align: 'right',
+      headerAlign: 'right',
       flex: 1,
       renderCell: ({row}) =>
         row.flow === 'in' ? (
@@ -42,6 +43,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
       width: 80,
       minWidth: 80,
       align: 'center',
+      headerAlign: 'center',
       renderCell: ({row}) =>
         row.flow === 'in' ? (
           <ArrowDropDownIcon sx={{color: 'green', fontSize: 36}} />
@@ -98,7 +100,7 @@ const TransactionsTable = ({transactions, rows = 6, height = 473}) => {
   ]
 
   return (
-    <Paper sx={{height, width: '100%'}}>
+    <Paper sx={{height, width: '100%', marginTop: 1}}>
       <StyledDataGrid
         disableSelectionOnClick
         columns={columns}

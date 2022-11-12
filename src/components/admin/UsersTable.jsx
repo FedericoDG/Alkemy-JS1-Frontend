@@ -1,5 +1,5 @@
+import {Chip, IconButton, Paper, Tooltip, Typography} from '@mui/material'
 import {DataGrid, esES} from '@mui/x-data-grid'
-import {IconButton, Paper, Tooltip} from '@mui/material'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import LockOpenIcon from '@mui/icons-material/LockOpen'
@@ -10,6 +10,7 @@ import styled from '@emotion/styled'
 
 import {setActiveUser, toggleResetPasswordModal} from '../../app/uiSlice'
 import {useBlockUser, useUnblockUser} from '../../hooks/useUsers'
+import transformCurrency from '../../utils/transformCurrency'
 
 const StyledDataGrid = styled(DataGrid)`
   &.MuiDataGrid-root .MuiDataGrid-columnHeader,
@@ -30,8 +31,6 @@ const UsersTable = ({users}) => {
 
   const handleShowAdminDrawer = (id) => {
     navigate(`/admin/user/${id}`)
-    // dispatch(togleAdminDrawer())
-    // dispatch(setActiveUser(id))
   }
 
   const handleOpenDialog = (id) => {
@@ -49,43 +48,60 @@ const UsersTable = ({users}) => {
 
   const columns = [
     {field: 'id', headerName: 'ID', width: 50},
-    {field: 'lastName', headerName: 'Apellido', width: 200},
-    {field: 'firstName', headerName: 'Nombre', width: 200},
+    {field: 'lastName', headerName: 'Apellido', width: 150},
+    {field: 'firstName', headerName: 'Nombre', width: 150},
     {
       flex: 1,
       field: 'email',
       headerName: 'Email',
-      width: 250,
+      width: 200,
     },
     {
       flex: 1,
       field: 'address',
       headerName: 'Dirección',
-      description: 'This column has a value getter and is not sortable.',
-      width: 250,
+      width: 350,
     },
     {
       field: 'balance',
       headerName: 'Balance',
-      description: 'This column has a value getter and is not sortable.',
-      width: 150,
+      width: 120,
       type: 'number',
+      renderCell: ({row}) => (
+        <Typography variant="body2">{transformCurrency(row.balance)}</Typography>
+      ),
+    },
+    {
+      field: 'status',
+      headerName: 'Estado',
+      width: 100,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: ({row}) => (
+        <div>
+          {row.status === 'blocked' ? (
+            <Chip color="error" label="bloqueado" size="small" />
+          ) : (
+            <Chip color="default" label="activo" size="small" />
+          )}
+        </div>
+      ),
     },
     {
       field: 'action',
       headerName: 'Acciones Rápidas',
       align: 'center',
       headerAlign: 'center',
-      width: 200,
+      width: 150,
       sortable: false,
-      renderCell: (obj) => (
+      renderCell: ({row}) => (
         <>
           <Tooltip title="Bloquear usuario">
             <span>
               <IconButton
                 color="warning"
-                disabled={obj.row.status === 'blocked'}
-                onClick={() => handleBlock(obj.row.id)}
+                disabled={row.status === 'blocked'}
+                onClick={() => handleBlock(row.id)}
               >
                 <LockPersonIcon />
               </IconButton>
@@ -95,8 +111,8 @@ const UsersTable = ({users}) => {
             <span>
               <IconButton
                 color="success"
-                disabled={obj.row.status !== 'blocked'}
-                onClick={() => hanbleUnblock(obj.row.id)}
+                disabled={row.status !== 'blocked'}
+                onClick={() => hanbleUnblock(row.id)}
               >
                 <LockOpenIcon />
               </IconButton>
@@ -104,7 +120,7 @@ const UsersTable = ({users}) => {
           </Tooltip>
           <Tooltip title="Resetear contraseña">
             <span>
-              <IconButton color="secondary" onClick={() => handleOpenDialog(obj.row.id)}>
+              <IconButton color="secondary" onClick={() => handleOpenDialog(row.id)}>
                 <LockResetIcon />
               </IconButton>
             </span>
@@ -119,9 +135,9 @@ const UsersTable = ({users}) => {
       headerAlign: 'center',
       width: 100,
       sortable: false,
-      renderCell: (obj) => (
+      renderCell: ({row}) => (
         <Tooltip title="Ver detalles del usuario">
-          <IconButton color="info" onClick={() => handleShowAdminDrawer(obj.row.id)}>
+          <IconButton color="info" onClick={() => handleShowAdminDrawer(row.id)}>
             <PersonSearchIcon fontSize="large" />
           </IconButton>
         </Tooltip>

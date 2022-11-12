@@ -42,6 +42,7 @@ const IncomesDialog = () => {
         color="primary"
         size="small"
         startIcon={<AddCardIcon />}
+        sx={{width: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >

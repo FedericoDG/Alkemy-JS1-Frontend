@@ -76,9 +76,9 @@ export const useUnblockUser = () => {
   const queryClient = useQueryClient()
 
   return useMutation(unblockUser, {
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.invalidateQueries('users')
-      notification('success', 'Usuario desbloqueado', 'light')
+      notification('success', res.message, 'light')
     },
   })
 }
@@ -87,9 +87,9 @@ export const useResetUserPassword = () => {
   const queryClient = useQueryClient()
 
   return useMutation(resetUserPassword, {
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.invalidateQueries('users')
-      notification('success', 'Contraseña reseteada', 'light')
+      notification('success', res.message, 'light')
     },
   })
 }

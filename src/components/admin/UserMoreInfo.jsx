@@ -11,7 +11,7 @@ import {
 
 const UserMoreInfo = ({user}) => (
   <TableContainer component={Paper}>
-    <Table>
+    <Table size="small">
       <TableHead>
         <TableRow>
           <TableCell align="left">Email</TableCell>
@@ -25,9 +25,9 @@ const UserMoreInfo = ({user}) => (
           <TableCell align="left">{user.address}</TableCell>
           <TableCell align="center">
             {user.status === 'blocked' ? (
-              <Chip color="error" label="BLOQUEADO" />
+              <Chip color="error" label="bloqueado" size="small" />
             ) : (
-              <Chip color="success" label="ACTIVO" />
+              <Chip color="default" label="activo" size="small" />
             )}
           </TableCell>
         </TableRow>

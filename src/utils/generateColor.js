@@ -10,6 +10,8 @@ const colors = {
   8: '#FFB74D',
   9: '#DCE775',
   10: '#FF8A65',
+  11: '#90A4AE',
+  12: '#A1887F',
 }
 
 const generateColor = (number) => colors[number]

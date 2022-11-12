@@ -10,7 +10,7 @@ import {
 
 const UserBalance = ({incomes, expenses, balance, transactions}) => (
   <TableContainer component={Paper}>
-    <Table>
+    <Table size="small">
       <TableHead>
         <TableRow>
           <TableCell align="center">Balance</TableCell>

@@ -47,6 +47,7 @@ const TransactionDialog = () => {
         color="error"
         size="small"
         startIcon={<LocalAtmIcon />}
+        sx={{width: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >

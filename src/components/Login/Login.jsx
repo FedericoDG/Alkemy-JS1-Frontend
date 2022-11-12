@@ -34,16 +34,16 @@ const SignIn = () => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography color="primary" component="h1" variant="h2">
+            Alkybank
+          </Typography>
+          <Typography component="h1" variant="h6">
             Ingresar
           </Typography>
           <Box sx={{mt: 1}}>
             <Form style={{width: '100%'}}>
               <Stack p={1} spacing={1}>
-                <CustomTextField autoFocus label="Email" name="email" style={{width: 360}} />
+                <CustomTextField label="Email" name="email" style={{width: 360}} />
                 <ErrorMessage component={FormError} name="email" />
                 <CustomTextField
                   fullWidth
