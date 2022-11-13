@@ -7,6 +7,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
 } from '@mui/material'
 
@@ -40,9 +41,11 @@ const ExpensesTable = ({distribution}) => (
                     borderRadius: 15,
                   }}
                 />
-                <Typography color="initial" variant="body1">
-                  {row.name}
-                </Typography>
+                <Tooltip title={row.description}>
+                  <Typography color="initial" variant="body1">
+                    {row.name}
+                  </Typography>
+                </Tooltip>
               </TableCell>
               <TableCell align="right">{transformCurrency(row.total)}</TableCell>
               <TableCell align="right">{Number(row.percentage).toFixed(2)} %</TableCell>

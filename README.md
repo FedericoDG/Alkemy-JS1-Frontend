@@ -1,26 +1,70 @@
-# AlkiBank - FrontEnd
+# AlkyBank - (frontend)
 
-## ✅ Primero lo primero: instalar las dependencias iniciales del proyecto antes de trabajar:
+Proyecto para Alkemy - Desarrollo fullstack JS.
+Wallet que le permite a los usuarios realizar transacciones de forma virtual y facilitar las
+operaciones entre personas.
+
+## Stack de tecnologías
+
+[React.js](https://en.reactjs.org/) -
+[Redux Toolkit](https://redux-toolkit.js.org/) -
+[React Router](https://reactrouter.com/en/main) -
+[TanStack Query](https://tanstack.com/query/v4) -
+[Formik](https://formik.org/) -
+[YUP](https://github.com/jquense/yup) -
+[Material UI](https://mui.com/) -
+[Socket.io](https://socket.io/)
+
+## Instalación
+
+#### Clonar el proyecto:
+
 ```bash
-npm install
+  git https://github.com/FedericoDG/Alkemy-JS1-Frontend.git
+  cd Alkemy-JS1-Frontend
 ```
-## 🚩 Recomendaciones:
-Utilizar la versión de Node v14.x
-## 💡 Comandos útiles
-### Para arrancar el proyecto 
-npm run dev
-### Para hacer un build  
-npm run build
 
-## 🏗 Algunos datos del proyecto:
-- El proyecto esta diseñado con el Container Component Pattern. Pueden utilizar otro patrón, pero recomendamos este por su orden y escalabilidad.
-- Dentro de la carpeta Components encontraran un ejemplom que explica dicho patrón.
-- El proyecto esta construido en Vite. En caso de querer realizar configuraciones adicionales, pueden consultar la documentación en https://vitejs.dev/guide/
+#### Reconstruir las dependencias:
 
-- Para el flujo de trabajo utilizaremos Gitflow. Para el mismo deberan crear una rama con el numero de tarjeta con el que esten trabajando
+```bash
+  npm install
+```
 
-![image](https://user-images.githubusercontent.com/79473217/193649836-2720c8f4-a038-4014-b9a5-c515a9aee273.png)
-- Cuando el trabajo este terminado, se debe generar el "Pull Request" o PR como le solemos llamar. El proyecto ya cuenta con un template de PR, por lo que ustedes solo tendran que completar con los datos que les indica el template. Esta seria una imagen de ejemplo de un PR con su evidencia en caso de falla y su caso de éxito.
+#### Variables de entorno
 
-![image](https://user-images.githubusercontent.com/79473217/198295580-95f8b955-4bdb-4fb5-8684-a40d8df102dc.png)
+Para ejecuar este proyecto, necesitarás agregar las siguentes variables de entorno en tu archivo **.env** .
 
+`VITE_API_URL`
+
+Puedes renombrar el archivo **.env.example** a **.env** . En él encontrarás datos de ejemplo para correr el proyecto en modo local.
+
+Ejecutar el proyecto:
+
+```bash
+  npm run dev
+```
+
+## Credenciales de ejemplo
+
+- **Administrador**: ext@usr.com - Password1234!
+- **Usuario Uno**: uno@mail.com - Password1234!
+- **Usuario Dos**: dos@mail.com - Password1234!
+
+## Screenshots
+
+![screenshot 1](https://nazgul.com.ar/images/alkybank_1.jpg)
+
+![screenshot 2](https://nazgul.com.ar/images/alkybank_2.jpg)
+
+![screenshot 3](https://nazgul.com.ar/images/alkybank_3.jpg)
+
+![screenshot 4](https://nazgul.com.ar/images/alkybank_4.jpg)
+
+![screenshot 5](https://nazgul.com.ar/images/alkybank_5.jpg)
+
+## Autores
+
+- [Diego Aguilar](https://www.linkedin.com/in/diego-mathias-aguilar-13233a56/)
+- [Adrián Centurión](https://www.linkedin.com/in/adrian-centurion/)
+- [Luca Gelmini](https://www.linkedin.com/in/lgelmini/)
+- [Federico González](https://www.linkedin.com/in/fededg/)

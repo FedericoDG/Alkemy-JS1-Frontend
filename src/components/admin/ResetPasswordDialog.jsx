@@ -37,7 +37,7 @@ const ResetPasswordDialog = () => {
     <Dialog open={resetPasswordModal} onClose={() => dispatch(toggleResetPasswordModal())}>
       <DialogTitle>Resetear Contraseña</DialogTitle>
       <DialogContent>
-        <DialogContentText>Puesea asignarle una nueva contraseña a este usuario.</DialogContentText>
+        <DialogContentText>Puedes asignarle una nueva contraseña a este usuario.</DialogContentText>
         <TextField
           autoFocus
           fullWidth
