@@ -1,6 +1,5 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
-import Admin from '../pages/Admin'
 import Dashboard from '../pages/Dashboard'
 import Details from '../pages/Details'
 import Footer from '../components/ui/Footer'
@@ -10,6 +9,7 @@ import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
 import RegisterPage from '../pages/RegisterPage'
 import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import ResponsiveAppBar from '../components/ui/Header'
+import Admin from '../pages/Admin'
 
 import AdminRoutes from './AdminRoutes'
 import PrivateRoutes from './PrivateRoutes'
