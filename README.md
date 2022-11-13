@@ -66,5 +66,5 @@ Ejecutar el proyecto:
 
 - [Diego Aguilar](https://www.linkedin.com/in/diego-mathias-aguilar-13233a56/)
 - [Adrián Centurión](https://www.linkedin.com/in/adrian-centurion/)
-- [Luca Gelmin](https://www.linkedin.com/in/lgelmini/)
+- [Luca Gelmini](https://www.linkedin.com/in/lgelmini/)
 - [Federico González](https://www.linkedin.com/in/fededg/)
