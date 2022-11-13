@@ -1,18 +1,15 @@
 import {Container, Typography, Box} from '@mui/material'
 
+import CreateCategoryDialog from '../components/dialogs/CreateCategoryDialog'
+import EditCategoryDialog from '../components/dialogs/EditCategoryDialog'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
 import userGetUsers from '../hooks/useUsers'
 import UsersTable from '../components/admin/UsersTable'
-import useGetCategory from '../hooks/useCategory'
-import CreateCategoryDialog from '../components/dialogs/CreateCategoryDialog'
-import EditCategoryDialog from '../components/dialogs/EditCategoryDialog'
 
 const Admin = () => {
   const {data: users, isLoading} = userGetUsers()
 
-  const {data: categories, isLoading: isLoadingCategories} = useGetCategory()
-
-  if (isLoading || isLoadingCategories) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />
 
   return (
     <Container maxWidth="xl" sx={{paddingY: 2, height: 'calc(100vh - 120px)'}}>
