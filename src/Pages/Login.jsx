@@ -1,7 +1,7 @@
 import LoginForm from '../components/Login/Login'
 import imgLogin from '../assets/login_image.jpg'
 
-import styles from './styles.module.css'
+import styles from './style.module.css'
 
 const Login = () => (
   <div className={styles.container}>

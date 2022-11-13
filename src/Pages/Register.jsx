@@ -1,7 +1,7 @@
 import RegisterForm from '../components/Register/Register'
 import imgLogin from '../assets/register_image.jpg'
 
-import styles from './styles.module.css'
+import styles from './style.module.css'
 
 const Register = () => (
   <div className={styles.container}>
