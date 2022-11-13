@@ -21,7 +21,7 @@ const ExpensesTable = ({distribution}) => (
         <TableRow>
           <TableCell>Gastos</TableCell>
           <TableCell align="right">Total</TableCell>
-          <TableCell align="right">Porcentage</TableCell>
+          <TableCell align="right">Porcentaje</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
