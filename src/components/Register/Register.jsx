@@ -1,9 +1,8 @@
-import {Avatar, Button, Stack, Grid, Box, Typography, Container} from '@mui/material'
+import {Button, Stack, Grid, Box, Typography, Container} from '@mui/material'
 import {Formik, Form, ErrorMessage} from 'formik'
 import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import * as Yup from 'yup'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
 import {useCreateUser} from '../../hooks/useUsers'
 import CustomTextField from '../Forms/CustomTextField'

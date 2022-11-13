@@ -5,9 +5,9 @@ import Dashboard from '../Pages/Dashboard'
 import Details from '../Pages/Details'
 import Footer from '../components/ui/Footer'
 import FooterAdmin from '../components/admin/FooterAdmin'
-import LoginPage from '../Pages/LoginPage'
+import Login from '../Pages/Login'
 import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
-import RegisterPage from '../Pages/RegisterPage'
+import Register from '../Pages/Register'
 import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import ResponsiveAppBar from '../components/ui/Header'
 
@@ -23,8 +23,8 @@ const AppRoutes = () => (
         element={
           <PublicRoutes>
             <Routes>
-              <Route element={<LoginPage />} path="/" />
-              <Route element={<RegisterPage />} path="/register" />
+              <Route element={<Login />} path="/" />
+              <Route element={<Register />} path="/register" />
               <Route element={<Navigate replace to="/" />} path="/*" />
             </Routes>
           </PublicRoutes>

@@ -45,6 +45,8 @@ export const useGetUserDetails = (id, onSuccess, onError) =>
     select: (data) => data.body,
   })
 
+// MUTATIONS
+
 export const useCreateUser = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()

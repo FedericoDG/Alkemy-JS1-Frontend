@@ -2,10 +2,6 @@ import {useField, useFormikContext} from 'formik'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 
-/* 
-Usage: <CustomSelect label="Usuarios" name="user" options={options_ARRAY} />
-*/
-
 const CustomSelect = ({name, options, ...otherProps}) => {
   const {setFieldValue} = useFormikContext()
   const [field, meta] = useField(name)

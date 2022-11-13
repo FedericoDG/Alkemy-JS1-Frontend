@@ -10,7 +10,6 @@ import {
   InputAdornment,
 } from '@mui/material'
 import {Form, Formik, ErrorMessage} from 'formik'
-import {io} from 'socket.io-client'
 import {useSelector} from 'react-redux'
 import {useState} from 'react'
 import * as Yup from 'yup'
@@ -53,7 +52,7 @@ const TransactionDialog = () => {
         color="secondary"
         size="small"
         startIcon={<CurrencyExchangeIcon />}
-        sx={{width: 145}}
+        sx={{minWidth: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >
@@ -62,7 +61,7 @@ const TransactionDialog = () => {
       <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{amount: 0, user: '', concept: '', categoryId: 1}}
+            initialValues={{amount: '', user: '', concept: '', categoryId: 1}}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               socket.emit('join_channel', values.user)

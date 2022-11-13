@@ -42,7 +42,7 @@ const IncomesDialog = () => {
         color="primary"
         size="small"
         startIcon={<AddCardIcon />}
-        sx={{width: 145}}
+        sx={{minWidth: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >
@@ -51,7 +51,7 @@ const IncomesDialog = () => {
       <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{amount: 0, concept: '', categoryId: 2}}
+            initialValues={{amount: '', concept: '', categoryId: 2}}
             validationSchema={validationSchemaIncomes}
             onSubmit={(values) => {
               addCredit(values)
