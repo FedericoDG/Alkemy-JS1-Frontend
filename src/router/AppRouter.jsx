@@ -1,13 +1,13 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
-import Dashboard from '../pages/Dashboard'
-import Admin from '../pages/Admin'
-import Details from '../pages/Details'
+import Admin from '../Pages/Admin'
+import Dashboard from '../Pages/Dashboard'
+import Details from '../Pages/Details'
 import Footer from '../components/ui/Footer'
 import FooterAdmin from '../components/admin/FooterAdmin'
-import LoginPage from '../pages/LoginPage'
+import LoginPage from '../Pages/LoginPage'
 import ProfileAdminDrawer from '../components/drawers/ProfileAdminDrawer'
-import RegisterPage from '../pages/RegisterPage'
+import RegisterPage from '../Pages/RegisterPage'
 import ResetPasswordDialog from '../components/admin/ResetPasswordDialog'
 import ResponsiveAppBar from '../components/ui/Header'
 
