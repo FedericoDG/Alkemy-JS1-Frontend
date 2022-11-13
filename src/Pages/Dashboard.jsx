@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 
 import {useGetMe} from '../hooks/useUsers'
 import CustomCard from '../components/ui/Card'
-import Dialogs from '../components/dialogs/Dialogs'
+import Dialogs from '../components/Dialogs/Dialogs'
 import ExpensesChart from '../components/charts/ExpensesChart'
 import ExpensesTable from '../components/ui/ExpensesTable'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
