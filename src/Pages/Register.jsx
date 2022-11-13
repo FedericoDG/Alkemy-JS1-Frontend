@@ -1,15 +1,15 @@
-import Register from '../components/register/Register'
+import RegisterForm from '../components/Register/Register'
 import imgLogin from '../assets/register_image.jpg'
 
 import styles from './styles.module.css'
 
-const RegisterPage = () => (
+const Register = () => (
   <div className={styles.container}>
     <div className={styles.boxImg}>
       <img alt="login-img" src={imgLogin} />
     </div>
-    <Register />
+    <RegisterForm />
   </div>
 )
 
-export default RegisterPage
+export default Register

@@ -5,7 +5,7 @@ const AdminRoutes = ({children}) => {
   const {auth} = useSelector((state) => state)
   const role = auth.user?.roleId
 
-  return role === 1 ? children : <Navigate to="/dashboard" />
+  return role === 1 || role === 2 ? children : <Navigate to="/dashboard" />
 }
 
 export default AdminRoutes

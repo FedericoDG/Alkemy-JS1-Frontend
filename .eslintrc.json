@@ -14,7 +14,7 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "default-param-last": 0,
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "import/order": [
       "warn",
       {
@@ -33,9 +33,9 @@
     "no-unused-vars": "warn",
     "padding-line-between-statements": [
       "error",
-      { "blankLine": "always", "prev": "*", "next": "return" },
-      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
-      { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] }
+      {"blankLine": "always", "prev": "*", "next": "return"},
+      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
     ],
     "prettier/prettier": "error",
     "react/function-component-definition": [

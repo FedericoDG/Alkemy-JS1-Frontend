@@ -1,7 +1,7 @@
 import {Container, Typography, Box} from '@mui/material'
 
-import CreateCategoryDialog from '../components/dialogs/CreateCategoryDialog'
-import EditCategoryDialog from '../components/dialogs/EditCategoryDialog'
+import CreateCategoryDialog from '../components/Dialogs/CreateCategoryDialog'
+import EditCategoryDialog from '../components/Dialogs/EditCategoryDialog'
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
 import userGetUsers from '../hooks/useUsers'
 import UsersTable from '../components/admin/UsersTable'

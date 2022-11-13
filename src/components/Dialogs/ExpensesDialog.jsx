@@ -47,7 +47,7 @@ const TransactionDialog = () => {
         color="error"
         size="small"
         startIcon={<LocalAtmIcon />}
-        sx={{width: 145}}
+        sx={{minWidth: 145}}
         variant="contained"
         onClick={handleClickOpenIncome}
       >
@@ -56,7 +56,7 @@ const TransactionDialog = () => {
       <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{amount: 0, category: '', concept: '', categoryId: ''}}
+            initialValues={{amount: '', category: '', concept: '', categoryId: ''}}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               transferTo({...values, categoryId: values.category})
