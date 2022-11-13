@@ -1,7 +1,7 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
-import Admin from '../pages/Admin'
 import Dashboard from '../pages/Dashboard'
+import Admin from '../pages/Admin'
 import Details from '../pages/Details'
 import Footer from '../components/ui/Footer'
 import FooterAdmin from '../components/admin/FooterAdmin'
