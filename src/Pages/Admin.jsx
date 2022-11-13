@@ -4,8 +4,8 @@ import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner'
 import userGetUsers from '../hooks/useUsers'
 import UsersTable from '../components/admin/UsersTable'
 import useGetCategory from '../hooks/useCategory'
-import CreateCategoryDialog from '../components/Dialogs/CreateCategoryDialog'
-import EditCategoryDialog from '../components/Dialogs/EditCategoryDialog'
+import CreateCategoryDialog from '../components/dialogs/CreateCategoryDialog'
+import EditCategoryDialog from '../components/dialogs/EditCategoryDialog'
 
 const Admin = () => {
   const {data: users, isLoading} = userGetUsers()
