@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   const {data: me, isLoading: isLoadingMe} = useGetMe()
 
-  const {data, isLoading} = useGetBalance()
+  const {data, isLoading, refetch} = useGetBalance()
 
   const socket = socketIO()
 
@@ -28,6 +28,7 @@ const Dashboard = () => {
 
     socket.on('income_transaction', (data) => {
       notification('success', data)
+      refetch()
     })
 
     return () => {
