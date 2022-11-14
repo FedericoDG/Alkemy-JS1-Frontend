@@ -10,7 +10,6 @@ import {
   InputAdornment,
 } from '@mui/material'
 import {Form, Formik, ErrorMessage} from 'formik'
-import {useSelector} from 'react-redux'
 import {useState} from 'react'
 import * as Yup from 'yup'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
@@ -18,8 +17,7 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 import CustomSelect from '../Forms/CustomSelect'
 import CustomTextField from '../Forms/CustomTextField'
 import FormError from '../Forms/FormError'
-import socketIO from '../../services/socket'
-import useAddCredit from '../../hooks/useTransactions'
+import useCreateTransaction from '../../hooks/useTransactions'
 import userGetUsers from '../../hooks/useUsers'
 
 const validationSchema = Yup.object().shape({
@@ -29,14 +27,13 @@ const validationSchema = Yup.object().shape({
 })
 
 const TransactionDialog = () => {
-  const {user} = useSelector((state) => state.auth)
   const [openIncome, setOpenIncome] = useState(false)
+
+  const initialValues = {amount: '', user: '', concept: '', categoryId: 1}
 
   const {data: users} = userGetUsers()
 
-  const {mutate: transferTo, isLoading} = useAddCredit()
-
-  const socket = socketIO()
+  const {mutate: transferTo, isLoading} = useCreateTransaction()
 
   const handleClickOpenIncome = () => {
     setOpenIncome(true)
@@ -61,15 +58,9 @@ const TransactionDialog = () => {
       <Dialog open={openIncome} onClose={handleCloseIncome}>
         <DialogContent>
           <Formik
-            initialValues={{amount: '', user: '', concept: '', categoryId: 1}}
+            initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              socket.emit('join_channel', values.user)
-              socket.emit('send_transaction', {
-                message: 'Transferencia recibida',
-                channel: values.user,
-              })
-              socket.emit('join_channel', user.id)
               transferTo({...values, destinationUserId: values.user})
               setOpenIncome(false)
             }}
